@@ -42,6 +42,8 @@ export default function SignUpPage() {
         email,
         password,
         role,
+        callbackURL: "/sign-in",
+        
       });
 
       if (error) {
@@ -51,7 +53,8 @@ export default function SignUpPage() {
 
       toast.success("Account created successfully!");
 
-      router.push(role === "technician" ? "/dashboard/technician" : "/dashboard/customer");
+      // router.push(role === "technician" ? "/dashboard/technician" : "/dashboard/customer");
+      router.push("/sign-in")
     } catch {
       toast.error("Something went wrong. Please try again.");
     } finally {

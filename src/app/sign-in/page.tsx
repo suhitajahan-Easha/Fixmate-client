@@ -68,7 +68,8 @@ export default function SignInPage() {
           ? redirectTo
           : dashboard;
 
-      router.push(safeRedirect);
+    //   router.push(safeRedirect);
+    router.push('/');
       router.refresh();
     } catch {
       toast.error("Something went wrong. Please try again.");
