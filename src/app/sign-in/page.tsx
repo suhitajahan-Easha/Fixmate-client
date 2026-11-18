@@ -54,7 +54,7 @@ export default function SignInPage() {
       const role = data?.user?.role;
 
       // Redirect to the requested page or the user's dashboard.
-      const redirectTo = searchParams.get("callbackUrl");
+      const redirectTo = searchParams.get("callbackURL");
 
       const dashboard =
         role === "admin"
@@ -68,8 +68,8 @@ export default function SignInPage() {
           ? redirectTo
           : dashboard;
 
-    //   router.push(safeRedirect);
-    router.push('/');
+      router.push(safeRedirect);
+    // router.push('/');
       router.refresh();
     } catch {
       toast.error("Something went wrong. Please try again.");
