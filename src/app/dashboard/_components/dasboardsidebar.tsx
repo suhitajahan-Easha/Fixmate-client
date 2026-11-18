@@ -85,9 +85,9 @@ const menuItemsByRole: Record<Role, MenuItem[]> = {
       icon: PlusCircle,
     },
     {
-      id: "bookings",
+      id: "request",
       name: "Repair Requests",
-      url: "/dashboard/technician/bookings",
+      url: "/dashboard/technician/My-Request",
       icon: ClipboardList,
     },
     {
@@ -119,7 +119,7 @@ const menuItemsByRole: Record<Role, MenuItem[]> = {
     },
     {
       id: "bookings",
-      name: "Manage Bookings",
+      name: "All Bookings",
       url: "/dashboard/admin/bookings",
       icon: ClipboardCheck,
     },

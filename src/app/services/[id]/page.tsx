@@ -197,7 +197,7 @@ export default async function ServiceDetailsPage({ params }: Props) {
           >
             Request Repair
           </button> */}
-          <RequestRepairButton serviceId={service._id} />
+          <RequestRepairButton serviceId={service._id} basePrice={service.basePrice} />
         </div>
 
       </div>
