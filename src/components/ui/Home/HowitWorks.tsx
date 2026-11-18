@@ -26,7 +26,7 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="bg-[#10233F] py-16">
+    <section className="bg-[#111827] py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-blue-300">
