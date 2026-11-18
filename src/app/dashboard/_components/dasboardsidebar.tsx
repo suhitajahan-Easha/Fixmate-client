@@ -17,6 +17,7 @@ import Link from "next/link";
 
 import {
   LayoutDashboard,
+  HousePlug,
   Wrench,
   PlusCircle,
   ClipboardList,
@@ -148,23 +149,71 @@ export function DashboardSidebar() {
   const menuItems = menuItemsByRole[role] || menuItemsByRole.customer;
 
   return (
-    <Sidebar>
-      <SidebarHeader className="border-b px-4 py-4">
+    // <Sidebar>
+    //   <SidebarHeader className="border-b px-4 py-4">
+    //     <Link href="/" className="flex items-center gap-2">
+    //       <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-white">
+    //         <Wrench size={21} />
+    //       </div>
+    //       <span className="text-xl font-bold text-gray-900">FixMate</span>
+    //     </Link>
+    //   </SidebarHeader>
+
+    //   <SidebarContent>
+    //     <SidebarGroup>
+    //       <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
+    //         Dashboard Menu
+    //       </p>
+
+    //       <SidebarMenu>
+    //         {menuItems.map((item) => {
+    //           const isActive =
+    //             pathname === item.url ||
+    //             (item.url !== "/dashboard/customer" &&
+    //               item.url !== "/dashboard/technician" &&
+    //               item.url !== "/dashboard/admin" &&
+    //               pathname.startsWith(`${item.url}/`));
+
+    //           return (
+    //             <SidebarMenuItem key={item.id}>
+    //               <SidebarMenuButton
+    //                 isActive={isActive}
+    //                 render={<Link href={item.url} />}
+    //               >
+    //                 <item.icon />
+    //                 <span>{item.name}</span>
+    //               </SidebarMenuButton>
+    //             </SidebarMenuItem>
+    //           );
+    //         })}
+    //       </SidebarMenu>
+    //     </SidebarGroup>
+    //   </SidebarContent>
+
+    //   <SidebarFooter className="border-t p-4">
+    //     <p className="text-xs text-gray-400">FixMate Dashboard</p>
+    //     <p className="text-sm font-medium capitalize text-gray-700">
+    //       {role} Account
+    //     </p>
+    //   </SidebarFooter>
+    // </Sidebar>
+    <Sidebar className="!bg-[#02112f] !text-white border-r border-[#29415F]">
+      <SidebarHeader className="!bg-[#02112f] border-b border-[#29415F] px-4 py-5">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-white">
-            <Wrench size={21} />
+            <HousePlug size={21} />
           </div>
-          <span className="text-xl font-bold text-gray-900">FixMate</span>
+          <span className="text-xl font-bold text-white">FixMate</span>
         </Link>
       </SidebarHeader>
 
-      <SidebarContent>
-        <SidebarGroup>
-          <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
+      <SidebarContent className="!bg-[#02112f] px-3 py-5">
+        <SidebarGroup className="!bg-[#02112f]">
+          <p className="mb-4 px-2 text-xs font-semibold uppercase tracking-wider text-blue-300">
             Dashboard Menu
           </p>
 
-          <SidebarMenu>
+          <SidebarMenu className="gap-2">
             {menuItems.map((item) => {
               const isActive =
                 pathname === item.url ||
@@ -178,6 +227,11 @@ export function DashboardSidebar() {
                   <SidebarMenuButton
                     isActive={isActive}
                     render={<Link href={item.url} />}
+                    className={`h-11 rounded-lg px-3 transition-all duration-200 ${
+                      isActive
+                        ? "!bg-blue-600 !text-white hover:!bg-blue-700"
+                        : "!bg-transparent !text-gray-300 hover:!bg-[#172F50] hover:!text-blue-300"
+                    }`}
                   >
                     <item.icon />
                     <span>{item.name}</span>
@@ -189,9 +243,9 @@ export function DashboardSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t p-4">
+      <SidebarFooter className="!bg-[#02112f] border-t border-[#29415F] p-4">
         <p className="text-xs text-gray-400">FixMate Dashboard</p>
-        <p className="text-sm font-medium capitalize text-gray-700">
+        <p className="mt-1 text-sm font-medium capitalize text-white">
           {role} Account
         </p>
       </SidebarFooter>
