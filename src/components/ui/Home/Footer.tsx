@@ -10,7 +10,7 @@ import { HousePlug, Mail, Phone, MapPin } from "lucide-react";
 const quickLinks = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
-  { name: "About Us", href: "/#about" },
+  { name: "About Us", href: "/about" },
 ];
 
 const categories = [
