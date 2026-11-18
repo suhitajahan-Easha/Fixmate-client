@@ -41,9 +41,13 @@ export default async function MyServicesPage() {
 
   // Get technician services
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/services?id=${user.id}`,
-    { cache: "no-store" },
+    `${process.env.NEXT_PUBLIC_API_URL}/services?id=${user.id}`
+    
   );
+  // const response = await fetch(
+  //   `${process.env.NEXT_PUBLIC_API_URL}/services?id=${user.id}`,
+  //   { cache: "no-store" },
+  // );
 
   const data = await response.json();
 

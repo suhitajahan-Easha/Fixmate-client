@@ -19,9 +19,12 @@ export default async function ServicesPage() {
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/services`,
-      { cache: "no-store" }
+      `${process.env.NEXT_PUBLIC_API_URL}/services`
     );
+    // const response = await fetch(
+    //   `${process.env.NEXT_PUBLIC_API_URL}/services`,
+    //   { cache: "no-store" }
+    // );
 
     if (response.ok) {
       const data = await response.json();

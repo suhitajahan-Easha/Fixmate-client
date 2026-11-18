@@ -311,7 +311,7 @@ export default function ManageRequestsPage() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[1200px] border-collapse text-left">
+              <table className="w-full min-w-300 border-collapse text-left">
                 <thead className="bg-gray-50">
                   <tr className="border-b border-gray-200">
                     <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
@@ -353,14 +353,14 @@ export default function ManageRequestsPage() {
 
                       {/* Service */}
                       <td className="px-5 py-5">
-                        <p className="max-w-[180px] font-medium text-gray-700">
+                        <p className="max-w-45 font-medium text-gray-700">
                           {booking.serviceTitle}
                         </p>
                       </td>
 
                       {/* Address */}
                       <td className="px-5 py-5">
-                        <p className="max-w-[160px] text-sm text-gray-600">
+                        <p className="max-w-40 text-sm text-gray-600">
                           {booking.address}
                         </p>
                       </td>
@@ -379,7 +379,7 @@ export default function ManageRequestsPage() {
 
                       {/* Problem Description */}
                       <td className="px-5 py-5">
-                        <p className="max-w-[220px] text-sm leading-6 text-gray-600">
+                        <p className="max-w-55 text-sm leading-6 text-gray-600">
                           {booking.problemDescription}
                         </p>
                       </td>
@@ -413,7 +413,7 @@ export default function ManageRequestsPage() {
 
                       {/* Actions */}
                       <td className="px-5 py-5">
-                        <div className="flex min-w-[130px] flex-col items-start gap-2">
+                        <div className="flex min-w-32.5 flex-col items-start gap-2">
                           {booking.status === "requested" && (
                             <>
                               <button

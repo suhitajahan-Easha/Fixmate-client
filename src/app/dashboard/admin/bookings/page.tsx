@@ -281,7 +281,7 @@ export default function AllBookingsPage() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[1150px] border-collapse text-left">
+              <table className="w-full min-w-287.5 border-collapse text-left">
                 <thead className="bg-gray-50">
                   <tr className="border-b border-gray-200">
                     <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
@@ -322,7 +322,7 @@ export default function AllBookingsPage() {
                       >
                         {/* Service */}
                         <td className="px-5 py-5">
-                          <p className="max-w-[180px] font-semibold text-gray-800">
+                          <p className="max-w-45 font-semibold text-gray-800">
                             {booking.serviceTitle}
                           </p>
                         </td>

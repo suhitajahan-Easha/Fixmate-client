@@ -38,8 +38,12 @@ export default async function ServiceDetailsPage({ params }: Props) {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/services/${id}`,
-      { cache: "no-store" }
+      
     );
+    // const response = await fetch(
+    //   `${process.env.NEXT_PUBLIC_API_URL}/services/${id}`,
+    //   { cache: "no-store" }
+    // );
 
     if (response.status === 404 || response.status === 400) {
       notFound();
