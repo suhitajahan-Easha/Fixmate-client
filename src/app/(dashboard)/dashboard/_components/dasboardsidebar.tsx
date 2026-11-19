@@ -125,9 +125,9 @@ const menuItemsByRole: Record<Role, MenuItem[]> = {
       icon: ClipboardCheck,
     },
     {
-      id: "payments",
-      name: "Payments",
-      url: "/dashboard/admin/payments",
+      id: "transactions",
+      name: "Transactions",
+      url: "/dashboard/admin/transactions",
       icon: CreditCard,
     },
     {

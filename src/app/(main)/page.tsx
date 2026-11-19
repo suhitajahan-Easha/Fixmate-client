@@ -10,12 +10,12 @@ import PopularCategories from "@/components/ui/Home/Popularcategories";
 export default function Home() {
   return (
     <div>
-      <Navbar></Navbar>
+      
       <Hero></Hero>
       <FeaturedServices></FeaturedServices>
       <HowItWorks></HowItWorks>
       <PopularCategories></PopularCategories>
-      <Footer></Footer>
+      
     </div>
   );
 }

@@ -8,8 +8,7 @@ import Footer from "@/components/ui/Home/Footer";
 
 export default function AboutPage() {
   return (
-    <>
-    <Navbar></Navbar>
+   
     <main className="min-h-screen bg-[#02112f] text-white">
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 
@@ -179,7 +178,6 @@ export default function AboutPage() {
 
       </div>
     </main>
-    <Footer></Footer>
-    </>
+    
   );
 }

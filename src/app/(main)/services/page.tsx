@@ -148,8 +148,7 @@ export default async function ServicesPage({ searchParams }: Props) {
   }
 
   return (
-    <>
-    <Navbar></Navbar>
+    
     <main className="min-h-screen bg-[#02112f] px-4 py-8 md:px-8">
       <div className="mx-auto max-w-7xl space-y-8">
         <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-300 transition hover:text-blue-400">
@@ -188,7 +187,6 @@ export default async function ServicesPage({ searchParams }: Props) {
         </section>
       </div>
     </main>
-    <Footer></Footer>
-    </>
+    
   );
 }

@@ -40,10 +40,10 @@ const Hero = () => {
           {/* CTA Buttons */}
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <Link
-              href="/services"
+              href="/sign-up"
               className="rounded-lg bg-blue-600 px-7 py-3.5 text-center font-semibold text-white transition hover:bg-blue-700"
             >
-              Book a Repair →
+              Create a Service →
             </Link>
 
             <Link
