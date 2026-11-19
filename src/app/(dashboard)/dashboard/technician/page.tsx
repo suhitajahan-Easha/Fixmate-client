@@ -53,6 +53,8 @@ const TechnicianDashboard = () => {
     }
 
     const fetchDashboardData = async () => {
+      const { data, error } = await authClient.token();
+                  const token = data?.token;
       try {
         setLoading(true);
         setError("");
@@ -63,6 +65,9 @@ const TechnicianDashboard = () => {
           }),
           fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${userId}`, {
             cache: "no-store",
+            headers:{
+                  authorization:`Bearer ${token}`,
+                }
           }),
         ]);
 

@@ -385,19 +385,25 @@ export default function MyBookingsPage() {
   // Get customer bookings
   useEffect(() => {
     const getBookings = async () => {
+       const { data, error } = await authClient.token();
+                  const token = data?.token;
       if (!session?.user?.id) return;
 
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${session.user.id}`
+          `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${session.user.id}`,{
+          headers:{
+                  authorization:`Bearer ${token}`,
+                }
+           }
         );
 
-        const data = await response.json();
+        const ddata = await response.json();
 
         if (response.ok) {
-          setBookings(data.result);
+          setBookings(ddata.result);
         } else {
-          toast.error(data.message || "Failed to load bookings");
+          toast.error(ddata.message || "Failed to load bookings");
         }
       } catch (error) {
         console.error("Get bookings error:", error);
@@ -421,6 +427,8 @@ export default function MyBookingsPage() {
     if (!selectedBooking || !session?.user?.id) return;
 
     setCancelLoading(true);
+     const { data, error } = await authClient.token();
+          const token = data?.token;
 
     try {
       const response = await fetch(
@@ -429,6 +437,7 @@ export default function MyBookingsPage() {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            authorization:`Bearer ${token}`
           },
           body: JSON.stringify({
             userId: session.user.id,
@@ -437,10 +446,10 @@ export default function MyBookingsPage() {
         }
       );
 
-      const data = await response.json();
+      const ddata = await response.json();
 
       if (!response.ok) {
-        toast.error(data.message || "Failed to cancel booking");
+        toast.error(ddata.message || "Failed to cancel booking");
         return;
       }
 
@@ -466,6 +475,8 @@ export default function MyBookingsPage() {
 
   // Create Stripe Checkout Session
   const handlePayment = async (bookingId: string) => {
+    const { data, error } = await authClient.token();
+                  const token = data?.token;
     if (!session?.user?.id) return;
 
     setPaymentLoading(bookingId);
@@ -477,6 +488,7 @@ export default function MyBookingsPage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            authorization:`Bearer ${token}`
           },
           body: JSON.stringify({
             bookingId,
@@ -485,19 +497,19 @@ export default function MyBookingsPage() {
         }
       );
 
-      const data = await response.json();
+      const ddata = await response.json();
 
       if (!response.ok) {
-        toast.error(data.message || "Failed to start payment");
+        toast.error(ddata.message || "Failed to start payment");
         return;
       }
 
-      if (!data.url) {
+      if (!ddata.url) {
         toast.error("Stripe Checkout URL not found");
         return;
       }
 
-      window.location.href = data.url;
+      window.location.href = ddata.url;
     } catch (error) {
       console.error("Payment error:", error);
       toast.error("Unable to start payment. Please try again.");

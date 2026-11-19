@@ -13,10 +13,20 @@ type Payment = {
 };
 
 async function getPayments(userId: string) {
+    const jwttoken=await auth.api.getToken({
+      headers:await headers()
+    })
+    
+    const token=jwttoken?.token
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/payments?userId=${userId}`,
-      { cache: "no-store" }
+      { cache: "no-store",
+        headers:{
+                  authorization:`Bearer ${token}`,
+                } 
+
+      }
     );
 
     if (!response.ok) {
