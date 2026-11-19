@@ -37,6 +37,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 type Props = {
   userId: string;
@@ -57,6 +58,8 @@ export default function ChangeUserRole({
 
   const handleRoleChange = async (newRole: string) => {
     setLoading(true);
+    const { data, error } = await authClient.token();
+          const token = data?.token;
 
     try {
       const response = await fetch(
@@ -65,6 +68,7 @@ export default function ChangeUserRole({
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            authorization:`Bearer ${token}`,
           },
           body: JSON.stringify({
             userId: loggedInUserId,
@@ -73,10 +77,10 @@ export default function ChangeUserRole({
         }
       );
 
-      const data = await response.json();
+      const ddata = await response.json();
 
       if (!response.ok) {
-        toast.error(data.message || "Failed to update user role");
+        toast.error(ddata.message || "Failed to update user role");
         return;
       }
 

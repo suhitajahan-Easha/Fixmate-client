@@ -5,6 +5,7 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 
+
 type Booking = {
   _id: string;
   serviceTitle: string;
@@ -83,6 +84,8 @@ const formatStatus = (status: string) => {
 
 export default function AllBookingsPage() {
   const { data: session, isPending } = authClient.useSession();
+  
+    
 
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -98,19 +101,24 @@ export default function AllBookingsPage() {
     }
 
     const fetchBookings = async () => {
+      const { data, error } = await authClient.token();
+      const token = data?.token;
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${session.user.id}`,
-        );
+          `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${session.user.id}`,{
+             headers:{
+                  authorization:`Bearer ${token}`,
+                }
+      });
 
-        const data = await response.json();
+        const bdata = await response.json();
 
-        if (!response.ok || !data.success) {
-          toast.error(data.message || "Failed to load bookings");
+        if (!response.ok || !bdata.success) {
+          toast.error(bdata.message || "Failed to load bookings");
           return;
         }
 
-        setBookings(data.result);
+        setBookings(bdata.result);
       } catch (error) {
         console.error("Fetch bookings error:", error);
         toast.error("Something went wrong while loading bookings");

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { Button } from "@/components/ui/button";
+import { authClient } from "@/lib/auth-client";
 
 type Props = {
   serviceId: string;
@@ -17,6 +18,8 @@ export default function ServiceApprovalActions({ serviceId, userId }: Props) {
 
   const handleApproval = async (approvalStatus: "approved" | "rejected") => {
     setLoading(true);
+        const { data, error } = await authClient.token();
+              const token = data?.token;
 
     try {
       const response = await fetch(
@@ -25,6 +28,7 @@ export default function ServiceApprovalActions({ serviceId, userId }: Props) {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            authorization:`Bearer ${token}`,
           },
           body: JSON.stringify({
             userId,
@@ -33,10 +37,10 @@ export default function ServiceApprovalActions({ serviceId, userId }: Props) {
         }
       );
 
-      const data = await response.json();
+      const ddata = await response.json();
 
       if (!response.ok) {
-        toast.error(data.message || "Failed to update service");
+        toast.error(ddata.message || "Failed to update service");
         return;
       }
 

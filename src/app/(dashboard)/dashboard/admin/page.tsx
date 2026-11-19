@@ -67,22 +67,28 @@ const AdminDashboard = () => {
     }
 
     const fetchDashboardStats = async () => {
+      const { data, error } = await authClient.token();
+            const token = data?.token;
       try {
         setLoading(true);
         setError("");
 
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/admin/dashboard-stats?userId=${userId}`,
-          { cache: "no-store" }
+          { cache: "no-store",
+            headers:{
+                  authorization:`Bearer ${token}`,
+                }
+           }
         );
 
-        const data = await response.json();
+        const ddata = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.message || "Failed to load dashboard");
+          throw new Error(ddata.message || "Failed to load dashboard");
         }
 
-        setStats(data.result);
+        setStats(ddata.result);
       } catch (error) {
         setError(
           error instanceof Error ? error.message : "Something went wrong"

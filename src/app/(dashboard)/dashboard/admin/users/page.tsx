@@ -13,6 +13,12 @@ type User = {
 };
 
 export default async function AdminUsersPage() {
+  const jwttoken=await auth.api.getToken({
+    headers:await headers()
+  })
+  
+  const token=jwttoken?.token
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -51,6 +57,10 @@ export default async function AdminUsersPage() {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
       cache: "no-store",
+      headers:{
+        authorization:`Bearer ${token}`,
+      }
+      
     });
 
     const data = await response.json();
