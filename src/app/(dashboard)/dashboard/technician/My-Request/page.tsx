@@ -646,19 +646,26 @@ export default function ManageRequestsPage() {
     }
 
     const fetchBookings = async () => {
+      const { data, error } = await authClient.token();
+              const token = data?.token;
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${session.user.id}`
+          `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${session.user.id}`,{
+            headers:{
+               authorization:`Bearer ${token}`,
+              }
+
+          }
         );
 
-        const data = await response.json();
+        const ddata = await response.json();
 
-        if (!response.ok || !data.success) {
-          toast.error(data.message || "Failed to load bookings");
+        if (!response.ok || !ddata.success) {
+          toast.error(ddata.message || "Failed to load bookings");
           return;
         }
 
-        setBookings(data.result);
+        setBookings(ddata.result);
       } catch (error) {
         console.error("Fetch bookings error:", error);
         toast.error("Something went wrong while loading bookings");
@@ -682,6 +689,8 @@ export default function ManageRequestsPage() {
     status: string,
     amount?: number
   ) => {
+    const { data, error } = await authClient.token();
+    const token = data?.token;
     if (!session?.user?.id) {
       toast.error("Please sign in first");
       return false;
@@ -696,6 +705,7 @@ export default function ManageRequestsPage() {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            authorization:`Bearer ${token}`,
           },
           body: JSON.stringify({
             userId: session.user.id,
@@ -705,10 +715,10 @@ export default function ManageRequestsPage() {
         }
       );
 
-      const data = await response.json();
+      const ddata = await response.json();
 
-      if (!response.ok || !data.success) {
-        toast.error(data.message || "Failed to update booking");
+      if (!response.ok || !ddata.success) {
+        toast.error(ddata.message || "Failed to update booking");
         return false;
       }
 
@@ -726,7 +736,7 @@ export default function ManageRequestsPage() {
         )
       );
 
-      toast.success(data.message || "Booking updated successfully");
+      toast.success(ddata.message || "Booking updated successfully");
       return true;
     } catch (error) {
       console.error("Update booking error:", error);

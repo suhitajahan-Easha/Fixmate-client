@@ -6,8 +6,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft, MapPin, Clock, Wrench, ShieldCheck, Wallet, CalendarCheck } from "lucide-react";
 import TechnicianAvatar from "@/components/ui/services/technicianavater";
-import Navbar from "@/components/ui/Home/Navbar";
-import Footer from "@/components/ui/Home/Footer";
+
 
 type Props = {
   params: Promise<{ id: string }>;

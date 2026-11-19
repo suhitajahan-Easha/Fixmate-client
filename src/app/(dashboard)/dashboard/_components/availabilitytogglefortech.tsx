@@ -25,6 +25,7 @@
 
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -35,10 +36,13 @@ type Props = {
 };
 
 export default function AvailabilityToggle({ initialValue, serviceId, userId }: Props) {
+  
   const [isAvailable, setIsAvailable] = useState(initialValue);
   const [loading, setLoading] = useState(false);
 
   const handleToggle = async () => {
+    const { data, error } = await authClient.token();
+    const token = data?.token;
     const newValue = !isAvailable;
     setLoading(true);
 
@@ -49,6 +53,7 @@ export default function AvailabilityToggle({ initialValue, serviceId, userId }: 
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            authorization:`Bearer ${token}`,
           },
           body: JSON.stringify({
             userId,
@@ -57,10 +62,10 @@ export default function AvailabilityToggle({ initialValue, serviceId, userId }: 
         }
       );
 
-      const data = await response.json();
+      const ddata = await response.json();
 
       if (!response.ok) {
-        toast.error(data.message || "Failed to update availability");
+        toast.error(ddata.message || "Failed to update availability");
         return;
       }
 

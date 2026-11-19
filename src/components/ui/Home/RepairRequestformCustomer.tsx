@@ -163,6 +163,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { X, UserRound, Wrench, CalendarDays, Wallet } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 type Props = {
   customerId: string;
@@ -194,6 +195,9 @@ export default function RepairRequestForm({
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    
+         
+              
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -207,7 +211,8 @@ export default function RepairRequestForm({
       preferredDate: formData.get("preferredDate"),
       problemDescription: formData.get("problemDescription"),
     };
-
+    const { data, error } = await authClient.token();
+    const token = data?.token;
     try {
       setLoading(true);
 
@@ -217,15 +222,16 @@ export default function RepairRequestForm({
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            authorization:`Bearer ${token}`
           },
           body: JSON.stringify(bookingData),
         }
       );
 
-      const data = await response.json();
+      const ddata = await response.json();
 
       if (!response.ok) {
-        toast.error(data.message || "Failed to submit repair request");
+        toast.error(ddata.message || "Failed to submit repair request");
         return;
       }
 

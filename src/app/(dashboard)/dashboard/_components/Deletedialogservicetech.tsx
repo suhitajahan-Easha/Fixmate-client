@@ -113,6 +113,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 type Props = {
   serviceId: string;
@@ -126,6 +127,8 @@ export default function DeleteServiceDialog({ serviceId, userId }: Props) {
   const router = useRouter();
 
   const handleDelete = async () => {
+    const { data, error } = await authClient.token();
+    const token = data?.token;
     setLoading(true);
     setError("");
 
@@ -136,15 +139,16 @@ export default function DeleteServiceDialog({ serviceId, userId }: Props) {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            authorization:`Bearer ${token}`,
           },
           body: JSON.stringify({ userId }),
         },
       );
 
-      const data = await response.json();
+      const ddata = await response.json();
 
       if (!response.ok) {
-        toast.error(data.message || "Failed to delete service");
+        toast.error(ddata.message || "Failed to delete service");
         return;
       }
 

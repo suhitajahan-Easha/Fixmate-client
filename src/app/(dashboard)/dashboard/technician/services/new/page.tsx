@@ -243,9 +243,10 @@ import { useRouter } from "next/navigation";
 import { uploadImage } from "@/lib/uploadImage";
 
 
-export default function AddServicePage() {
+export default  function AddServicePage() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
+  
   const router = useRouter();
 
   const [imageUrl, setImageUrl] = useState("");
@@ -272,6 +273,7 @@ export default function AddServicePage() {
   };
 
   const handleAddService = async (e: React.FormEvent<HTMLFormElement>) => {
+   
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -304,12 +306,15 @@ export default function AddServicePage() {
       approvalStatus: "pending",
       isAvailable: true,
     };
-
+    
     try {
+      const { data, error } = await authClient.token();
+      const token = data?.token;
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/services`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization:`Bearer ${token}`,
         },
         body: JSON.stringify(newService),
       });
