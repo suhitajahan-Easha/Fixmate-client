@@ -42,8 +42,7 @@ export default async function ServiceDetailsPage({ params }: Props) {
   }
 
   return (
-    <>
-    <Navbar></Navbar>
+   
     <main className="min-h-screen bg-[#02112f] px-4 py-8 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl space-y-8">
 
@@ -215,7 +214,6 @@ export default async function ServiceDetailsPage({ params }: Props) {
 
       </div>
     </main>
-    <Footer></Footer>
-    </>
+    
   );
 }

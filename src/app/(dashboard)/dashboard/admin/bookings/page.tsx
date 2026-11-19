@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -39,25 +38,42 @@ const filters: { label: string; value: FilterStatus }[] = [
   { label: "Cancelled", value: "cancelled" },
 ];
 
+// const getStatusStyle = (status: string) => {
+//   switch (status) {
+//     case "requested":
+//       return "bg-amber-100 text-amber-700";
+//     case "accepted":
+//       return "bg-blue-100 text-blue-700";
+//     case "in-progress":
+//       return "bg-purple-100 text-purple-700";
+//     case "completed":
+//       return "bg-green-100 text-green-700";
+//     case "rejected":
+//       return "bg-red-100 text-red-700";
+//     case "cancelled":
+//       return "bg-gray-100 text-gray-700";
+//     default:
+//       return "bg-gray-100 text-gray-700";
+//   }
+// };
 const getStatusStyle = (status: string) => {
   switch (status) {
     case "requested":
-      return "bg-amber-100 text-amber-700";
+      return "bg-blue-500/15 text-blue-400";
     case "accepted":
-      return "bg-blue-100 text-blue-700";
+      return "bg-indigo-500/15 text-indigo-400";
     case "in-progress":
-      return "bg-purple-100 text-purple-700";
+      return "bg-amber-500/15 text-amber-400";
     case "completed":
-      return "bg-green-100 text-green-700";
+      return "bg-green-500/15 text-green-400";
     case "rejected":
-      return "bg-red-100 text-red-700";
+      return "bg-red-500/15 text-red-400";
     case "cancelled":
-      return "bg-gray-100 text-gray-700";
+      return "bg-gray-500/15 text-gray-400";
     default:
-      return "bg-gray-100 text-gray-700";
+      return "bg-gray-500/15 text-gray-400";
   }
 };
-
 const formatStatus = (status: string) => {
   return status
     .split("-")
@@ -84,7 +100,7 @@ export default function AllBookingsPage() {
     const fetchBookings = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${session.user.id}`
+          `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${session.user.id}`,
         );
 
         const data = await response.json();
@@ -116,15 +132,15 @@ export default function AllBookingsPage() {
   const totalBookings = bookings.length;
 
   const completedBookings = bookings.filter(
-    (booking) => booking.status === "completed"
+    (booking) => booking.status === "completed",
   ).length;
 
   const inProgressBookings = bookings.filter(
-    (booking) => booking.status === "in-progress"
+    (booking) => booking.status === "in-progress",
   ).length;
 
   const unpaidBookings = bookings.filter(
-    (booking) => booking.paymentStatus === "unpaid"
+    (booking) => booking.paymentStatus === "unpaid",
   ).length;
 
   if (isPending || loading) {
@@ -154,9 +170,7 @@ export default function AllBookingsPage() {
   if (session.user.role !== "admin") {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3">
-        <h2 className="text-xl font-bold text-gray-800">
-          Access Denied
-        </h2>
+        <h2 className="text-xl font-bold text-gray-800">Access Denied</h2>
         <p className="text-sm text-gray-500">
           Only administrators can view all bookings.
         </p>
@@ -168,83 +182,303 @@ export default function AllBookingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-6 sm:px-6 lg:px-8">
+    // <div className="min-h-screen bg-gray-50 px-4 py-6 sm:px-6 lg:px-8">
+    //   <div className="mx-auto max-w-7xl">
+    //     {/* Back to Home */}
+    //     <Link
+    //       href="/"
+    //       className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-blue-600"
+    //     >
+    //       ← Back to Home
+    //     </Link>
+
+    //     {/* Page Heading */}
+    //     <div className="mb-7">
+    //       <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+    //         All Bookings
+    //       </h1>
+    //       <p className="mt-1 text-sm text-gray-500">
+    //         Monitor all repair bookings across the FixMate platform.
+    //       </p>
+    //     </div>
+
+    //     {/* Summary Cards */}
+    //     <div className="mb-7 grid grid-cols-2 gap-4 lg:grid-cols-4">
+    //       <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
+    //         <p className="text-sm font-medium text-gray-500">
+    //           Total Bookings
+    //         </p>
+    //         <h2 className="mt-2 text-2xl font-bold text-gray-900">
+    //           {totalBookings}
+    //         </h2>
+    //         <p className="mt-1 text-xs text-gray-400">
+    //           All platform bookings
+    //         </p>
+    //       </div>
+
+    //       <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
+    //         <p className="text-sm font-medium text-gray-500">
+    //           Completed
+    //         </p>
+    //         <h2 className="mt-2 text-2xl font-bold text-green-600">
+    //           {completedBookings}
+    //         </h2>
+    //         <p className="mt-1 text-xs text-gray-400">
+    //           Successfully completed
+    //         </p>
+    //       </div>
+
+    //       <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
+    //         <p className="text-sm font-medium text-gray-500">
+    //           In Progress
+    //         </p>
+    //         <h2 className="mt-2 text-2xl font-bold text-blue-600">
+    //           {inProgressBookings}
+    //         </h2>
+    //         <p className="mt-1 text-xs text-gray-400">
+    //           Active repair jobs
+    //         </p>
+    //       </div>
+
+    //       <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
+    //         <p className="text-sm font-medium text-gray-500">
+    //           Unpaid Bookings
+    //         </p>
+    //         <h2 className="mt-2 text-2xl font-bold text-amber-600">
+    //           {unpaidBookings}
+    //         </h2>
+    //         <p className="mt-1 text-xs text-gray-400">
+    //           Payment not received
+    //         </p>
+    //       </div>
+    //     </div>
+
+    //     {/* Booking Records */}
+    //     <div className="mb-5">
+    //       <h2 className="text-lg font-bold text-gray-900">
+    //         Booking Records
+    //       </h2>
+    //       <p className="mt-1 text-sm text-gray-500">
+    //         View and monitor every customer booking.
+    //       </p>
+    //     </div>
+
+    //     {/* Status Filters */}
+    //     <div className="mb-5 flex flex-wrap gap-2">
+    //       {filters.map((filter) => (
+    //         <button
+    //           key={filter.value}
+    //           onClick={() => setFilterStatus(filter.value)}
+    //           className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
+    //             filterStatus === filter.value
+    //               ? "bg-blue-600 text-white shadow-sm"
+    //               : "border border-gray-200 bg-white text-gray-600 hover:border-blue-300 hover:text-blue-600"
+    //           }`}
+    //         >
+    //           {filter.label}
+    //           {filter.value === "all" && ` (${bookings.length})`}
+    //         </button>
+    //       ))}
+    //     </div>
+
+    //     {/* Bookings Table */}
+    //     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+    //       {filteredBookings.length === 0 ? (
+    //         <div className="px-6 py-16 text-center">
+    //           <div className="mb-3 text-4xl">📋</div>
+    //           <h3 className="text-lg font-semibold text-gray-800">
+    //             No bookings found
+    //           </h3>
+    //           <p className="mt-1 text-sm text-gray-500">
+    //             There are no bookings under this status.
+    //           </p>
+    //         </div>
+    //       ) : (
+    //         <div className="overflow-x-auto">
+    //           <table className="w-full min-w-287.5 border-collapse text-left">
+    //             <thead className="bg-gray-50">
+    //               <tr className="border-b border-gray-200">
+    //                 <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+    //                   Service
+    //                 </th>
+    //                 <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+    //                   Customer
+    //                 </th>
+    //                 <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+    //                   Technician
+    //                 </th>
+    //                 <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+    //                   Preferred Date
+    //                 </th>
+    //                 <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+    //                   Status
+    //                 </th>
+    //                 <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+    //                   Payment
+    //                 </th>
+    //                 <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+    //                   Amount
+    //                 </th>
+    //               </tr>
+    //             </thead>
+
+    //             <tbody className="divide-y divide-gray-100">
+    //               {filteredBookings.map((booking) => {
+    //                 const amount =
+    //                   booking.status === "completed"
+    //                     ? booking.finalAmount
+    //                     : booking.basePrice;
+
+    //                 return (
+    //                   <tr
+    //                     key={booking._id}
+    //                     className="transition hover:bg-gray-50"
+    //                   >
+    //                     {/* Service */}
+    //                     <td className="px-5 py-5">
+    //                       <p className="max-w-45 font-semibold text-gray-800">
+    //                         {booking.serviceTitle}
+    //                       </p>
+    //                     </td>
+
+    //                     {/* Customer */}
+    //                     <td className="px-5 py-5">
+    //                       <p className="font-medium text-gray-800">
+    //                         {booking.customerName}
+    //                       </p>
+    //                       <p className="mt-1 text-xs text-gray-500">
+    //                         {booking.customerEmail}
+    //                       </p>
+    //                     </td>
+
+    //                     {/* Technician */}
+    //                     <td className="px-5 py-5">
+    //                       <p className="font-medium text-gray-800">
+    //                         {booking.technicianName}
+    //                       </p>
+    //                       <p className="mt-1 text-xs text-gray-500">
+    //                         {booking.technicianEmail}
+    //                       </p>
+    //                     </td>
+
+    //                     {/* Preferred Date */}
+    //                     <td className="whitespace-nowrap px-5 py-5 text-sm text-gray-600">
+    //                       {new Date(
+    //                         booking.preferredDate
+    //                       ).toLocaleDateString("en-US", {
+    //                         year: "numeric",
+    //                         month: "short",
+    //                         day: "numeric",
+    //                       })}
+    //                     </td>
+
+    //                     {/* Booking Status */}
+    //                     <td className="px-5 py-5">
+    //                       <span
+    //                         className={`inline-flex whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold ${getStatusStyle(
+    //                           booking.status
+    //                         )}`}
+    //                       >
+    //                         {formatStatus(booking.status)}
+    //                       </span>
+    //                     </td>
+
+    //                     {/* Payment Status */}
+    //                     <td className="px-5 py-5">
+    //                       <span
+    //                         className={`inline-flex whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold ${
+    //                           booking.paymentStatus === "paid"
+    //                             ? "bg-green-100 text-green-700"
+    //                             : "bg-amber-100 text-amber-700"
+    //                         }`}
+    //                       >
+    //                         {formatStatus(booking.paymentStatus)}
+    //                       </span>
+    //                     </td>
+
+    //                     {/* Amount */}
+    //                     <td className="whitespace-nowrap px-5 py-5 text-sm font-semibold text-gray-800">
+    //                       ${Number(amount ?? 0).toFixed(2)}
+    //                       <p className="mt-1 text-xs font-normal text-gray-400">
+    //                         {booking.status === "completed"
+    //                           ? "Final amount"
+    //                           : "Base price"}
+    //                       </p>
+    //                     </td>
+    //                   </tr>
+    //                 );
+    //               })}
+    //             </tbody>
+    //           </table>
+    //         </div>
+    //       )}
+    //     </div>
+
+    //     {/* Footer */}
+    //     <p className="mt-4 text-xs text-gray-400">
+    //       Showing {filteredBookings.length} of {totalBookings} bookings.
+    //     </p>
+    //   </div>
+    // </div>
+    <div className="min-h-screen bg-[#10233F] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Back to Home */}
         <Link
           href="/"
-          className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-blue-600"
+          className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-gray-300 transition hover:text-blue-400"
         >
           ← Back to Home
         </Link>
 
         {/* Page Heading */}
         <div className="mb-7">
-          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-white sm:text-3xl">
             All Bookings
           </h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-gray-300">
             Monitor all repair bookings across the FixMate platform.
           </p>
         </div>
 
         {/* Summary Cards */}
         <div className="mb-7 grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
-            <p className="text-sm font-medium text-gray-500">
-              Total Bookings
-            </p>
-            <h2 className="mt-2 text-2xl font-bold text-gray-900">
+          <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-4 shadow-sm sm:p-5">
+            <p className="text-sm font-medium text-gray-300">Total Bookings</p>
+            <h2 className="mt-2 text-2xl font-bold text-white">
               {totalBookings}
             </h2>
-            <p className="mt-1 text-xs text-gray-400">
-              All platform bookings
-            </p>
+            <p className="mt-1 text-xs text-gray-400">All platform bookings</p>
           </div>
 
-          <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
-            <p className="text-sm font-medium text-gray-500">
-              Completed
-            </p>
-            <h2 className="mt-2 text-2xl font-bold text-green-600">
+          <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-4 shadow-sm sm:p-5">
+            <p className="text-sm font-medium text-gray-300">Completed</p>
+            <h2 className="mt-2 text-2xl font-bold text-green-400">
               {completedBookings}
             </h2>
-            <p className="mt-1 text-xs text-gray-400">
-              Successfully completed
-            </p>
+            <p className="mt-1 text-xs text-gray-400">Successfully completed</p>
           </div>
 
-          <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
-            <p className="text-sm font-medium text-gray-500">
-              In Progress
-            </p>
-            <h2 className="mt-2 text-2xl font-bold text-blue-600">
+          <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-4 shadow-sm sm:p-5">
+            <p className="text-sm font-medium text-gray-300">In Progress</p>
+            <h2 className="mt-2 text-2xl font-bold text-amber-400">
               {inProgressBookings}
             </h2>
-            <p className="mt-1 text-xs text-gray-400">
-              Active repair jobs
-            </p>
+            <p className="mt-1 text-xs text-gray-400">Active repair jobs</p>
           </div>
 
-          <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
-            <p className="text-sm font-medium text-gray-500">
-              Unpaid Bookings
-            </p>
-            <h2 className="mt-2 text-2xl font-bold text-amber-600">
+          <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-4 shadow-sm sm:p-5">
+            <p className="text-sm font-medium text-gray-300">Unpaid Bookings</p>
+            <h2 className="mt-2 text-2xl font-bold text-amber-400">
               {unpaidBookings}
             </h2>
-            <p className="mt-1 text-xs text-gray-400">
-              Payment not received
-            </p>
+            <p className="mt-1 text-xs text-gray-400">Payment not received</p>
           </div>
         </div>
 
         {/* Booking Records */}
         <div className="mb-5">
-          <h2 className="text-lg font-bold text-gray-900">
-            Booking Records
-          </h2>
-          <p className="mt-1 text-sm text-gray-500">
+          <h2 className="text-lg font-bold text-white">Booking Records</h2>
+          <p className="mt-1 text-sm text-gray-300">
             View and monitor every customer booking.
           </p>
         </div>
@@ -258,7 +492,7 @@ export default function AllBookingsPage() {
               className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
                 filterStatus === filter.value
                   ? "bg-blue-600 text-white shadow-sm"
-                  : "border border-gray-200 bg-white text-gray-600 hover:border-blue-300 hover:text-blue-600"
+                  : "border border-[#45617F] bg-[#1B3658] text-gray-300 hover:border-blue-400 hover:text-blue-400"
               }`}
             >
               {filter.label}
@@ -268,47 +502,47 @@ export default function AllBookingsPage() {
         </div>
 
         {/* Bookings Table */}
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+        <div className="overflow-hidden rounded-xl border border-[#345071] bg-[#1B3658] shadow-sm">
           {filteredBookings.length === 0 ? (
             <div className="px-6 py-16 text-center">
               <div className="mb-3 text-4xl">📋</div>
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-lg font-semibold text-white">
                 No bookings found
               </h3>
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-sm text-gray-300">
                 There are no bookings under this status.
               </p>
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full min-w-287.5 border-collapse text-left">
-                <thead className="bg-gray-50">
-                  <tr className="border-b border-gray-200">
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+              <table className="w-full min-w-[1150px] border-collapse text-left">
+                <thead className="bg-[#142D4C]">
+                  <tr className="border-b border-[#345071]">
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-300">
                       Service
                     </th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-300">
                       Customer
                     </th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-300">
                       Technician
                     </th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-300">
                       Preferred Date
                     </th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-300">
                       Status
                     </th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-300">
                       Payment
                     </th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-300">
                       Amount
                     </th>
                   </tr>
                 </thead>
 
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-[#345071]">
                   {filteredBookings.map((booking) => {
                     const amount =
                       booking.status === "completed"
@@ -318,52 +552,51 @@ export default function AllBookingsPage() {
                     return (
                       <tr
                         key={booking._id}
-                        className="transition hover:bg-gray-50"
+                        className="transition hover:bg-[#264669]/50"
                       >
                         {/* Service */}
                         <td className="px-5 py-5">
-                          <p className="max-w-45 font-semibold text-gray-800">
+                          <p className="max-w-45 font-semibold text-white">
                             {booking.serviceTitle}
                           </p>
                         </td>
 
                         {/* Customer */}
                         <td className="px-5 py-5">
-                          <p className="font-medium text-gray-800">
+                          <p className="font-medium text-gray-200">
                             {booking.customerName}
                           </p>
-                          <p className="mt-1 text-xs text-gray-500">
+                          <p className="mt-1 break-all text-xs text-gray-400">
                             {booking.customerEmail}
                           </p>
                         </td>
 
                         {/* Technician */}
                         <td className="px-5 py-5">
-                          <p className="font-medium text-gray-800">
+                          <p className="font-medium text-gray-200">
                             {booking.technicianName}
                           </p>
-                          <p className="mt-1 text-xs text-gray-500">
+                          <p className="mt-1 break-all text-xs text-gray-400">
                             {booking.technicianEmail}
                           </p>
                         </td>
 
                         {/* Preferred Date */}
-                        <td className="whitespace-nowrap px-5 py-5 text-sm text-gray-600">
-                          {new Date(
-                            booking.preferredDate
-                          ).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          })}
+                        <td className="whitespace-nowrap px-5 py-5 text-sm text-gray-300">
+                          {new Date(booking.preferredDate).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            },
+                          )}
                         </td>
 
                         {/* Booking Status */}
                         <td className="px-5 py-5">
                           <span
-                            className={`inline-flex whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold ${getStatusStyle(
-                              booking.status
-                            )}`}
+                            className={`inline-flex whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold ${getStatusStyle(booking.status)}`}
                           >
                             {formatStatus(booking.status)}
                           </span>
@@ -374,8 +607,8 @@ export default function AllBookingsPage() {
                           <span
                             className={`inline-flex whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold ${
                               booking.paymentStatus === "paid"
-                                ? "bg-green-100 text-green-700"
-                                : "bg-amber-100 text-amber-700"
+                                ? "bg-green-500/15 text-green-400"
+                                : "bg-amber-500/15 text-amber-400"
                             }`}
                           >
                             {formatStatus(booking.paymentStatus)}
@@ -383,7 +616,7 @@ export default function AllBookingsPage() {
                         </td>
 
                         {/* Amount */}
-                        <td className="whitespace-nowrap px-5 py-5 text-sm font-semibold text-gray-800">
+                        <td className="whitespace-nowrap px-5 py-5 text-sm font-semibold text-white">
                           ${Number(amount ?? 0).toFixed(2)}
                           <p className="mt-1 text-xs font-normal text-gray-400">
                             {booking.status === "completed"

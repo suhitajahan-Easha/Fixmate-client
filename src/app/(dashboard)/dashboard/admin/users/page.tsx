@@ -93,65 +93,249 @@ export default async function AdminUsersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-6 sm:px-6 lg:px-8">
+    // <div className="min-h-screen bg-gray-50 px-4 py-6 sm:px-6 lg:px-8">
+    //   <div className="mx-auto max-w-7xl">
+    //     {/* Back to Home */}
+    //     <Link
+    //       href="/"
+    //       className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-gray-600 transition hover:text-blue-600"
+    //     >
+    //       <span>←</span> Back to Home
+    //     </Link>
+
+    //     {/* Page Heading */}
+    //     <div className="mb-7">
+    //       <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+    //         Manage Users
+    //       </h1>
+    //       <p className="mt-2 text-sm text-gray-500">
+    //         View and manage all registered users.
+    //       </p>
+    //     </div>
+
+    //     {/* Summary Cards */}
+    //     <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+    //       <div className="rounded-xl border bg-white p-5 shadow-sm">
+    //         <p className="text-sm text-gray-500">Total Users</p>
+    //         <h2 className="mt-2 text-2xl font-bold text-gray-900">
+    //           {users.length}
+    //         </h2>
+    //       </div>
+
+    //       <div className="rounded-xl border bg-white p-5 shadow-sm">
+    //         <p className="text-sm text-gray-500">Customers</p>
+    //         <h2 className="mt-2 text-2xl font-bold text-blue-600">
+    //           {customers}
+    //         </h2>
+    //       </div>
+
+    //       <div className="rounded-xl border bg-white p-5 shadow-sm">
+    //         <p className="text-sm text-gray-500">Technicians</p>
+    //         <h2 className="mt-2 text-2xl font-bold text-purple-600">
+    //           {technicians}
+    //         </h2>
+    //       </div>
+    //     </div>
+
+    //     {/* Users List */}
+    //     <div className="overflow-hidden rounded-xl border bg-white shadow-sm">
+    //       <div className="border-b px-5 py-4">
+    //         <h2 className="font-semibold text-gray-900">All Users</h2>
+    //         <p className="mt-1 text-sm text-gray-500">
+    //           {users.length} registered users
+    //         </p>
+    //       </div>
+
+    //       {errorMessage ? (
+    //         <div className="p-8 text-center text-sm text-red-500">
+    //           {errorMessage}
+    //         </div>
+    //       ) : users.length === 0 ? (
+    //         <div className="p-10 text-center text-gray-500">
+    //           No users found.
+    //         </div>
+    //       ) : (
+    //         <>
+    //           {/* Desktop Table */}
+    //           <div className="hidden overflow-x-auto md:block">
+    //             <table className="w-full text-left text-sm">
+    //               <thead className="bg-gray-50 text-gray-500">
+    //                 <tr>
+    //                   <th className="px-6 py-4 font-medium">User</th>
+    //                   <th className="px-6 py-4 font-medium">Email</th>
+    //                   <th className="px-6 py-4 font-medium">Role</th>
+    //                   <th className="px-6 py-4 font-medium">Joined Date</th>
+    //                   <th className="px-6 py-4 font-medium">Change Role</th>
+    //                 </tr>
+    //               </thead>
+
+    //               <tbody className="divide-y">
+    //                 {users.map((user) => (
+    //                   <tr
+    //                     key={user._id}
+    //                     className="transition hover:bg-gray-50"
+    //                   >
+    //                     <td className="px-6 py-4">
+    //                       <div className="flex items-center gap-3">
+    //                         {user.image ? (
+    //                           <img
+    //                             src={user.image}
+    //                             alt={user.name || "User"}
+    //                             className="h-10 w-10 rounded-full object-cover"
+    //                           />
+    //                         ) : (
+    //                           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 font-semibold text-blue-700">
+    //                             {getInitial(user.name)}
+    //                           </div>
+    //                         )}
+    //                         <span className="font-medium text-gray-900">
+    //                           {user.name || "Unnamed User"}
+    //                         </span>
+    //                       </div>
+    //                     </td>
+
+    //                     <td className="px-6 py-4 text-gray-600">
+    //                       {user.email}
+    //                     </td>
+
+    //                     <td className="px-6 py-4">
+    //                       <span
+    //                         className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${getRoleStyle(user.role)}`}
+    //                       >
+    //                         {user.role}
+    //                       </span>
+    //                     </td>
+
+    //                     <td className="px-6 py-4 text-gray-600">
+    //                       {formatDate(user.createdAt)}
+    //                     </td>
+    //                     <td className="px-6 py-4">
+    //                       <ChangeUserRole
+    //                         userId={user._id}
+    //                         currentRole={user.role}
+    //                         loggedInUserId={session.user.id}
+    //                       />
+    //                     </td>
+    //                   </tr>
+    //                 ))}
+    //               </tbody>
+    //             </table>
+    //           </div>
+
+    //           {/* Mobile Cards */}
+    //           <div className="divide-y md:hidden">
+    //             {users.map((user) => (
+    //               <div key={user._id} className="space-y-3 p-4">
+    //                 <div className="flex items-center gap-3">
+    //                   {user.image ? (
+    //                     <img
+    //                       src={user.image}
+    //                       alt={user.name || "User"}
+    //                       className="h-11 w-11 rounded-full object-cover"
+    //                     />
+    //                   ) : (
+    //                     <div className="flex h-11 w-11 items-center justify-center rounded-full bg-blue-100 font-semibold text-blue-700">
+    //                       {getInitial(user.name)}
+    //                     </div>
+    //                   )}
+
+    //                   <div className="min-w-0 flex-1">
+    //                     <h3 className="truncate font-semibold text-gray-900">
+    //                       {user.name || "Unnamed User"}
+    //                     </h3>
+    //                     <p className="truncate text-sm text-gray-500">
+    //                       {user.email}
+    //                     </p>
+    //                   </div>
+    //                 </div>
+
+    //                 <div className="flex items-center justify-between">
+    //                   <span
+    //                     className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${getRoleStyle(user.role)}`}
+    //                   >
+    //                     {user.role}
+    //                   </span>
+    //                   <span className="text-xs text-gray-500">
+    //                     Joined: {formatDate(user.createdAt)}
+    //                   </span>
+    //                 </div>
+    //                 <div className="pt-2">
+    //                   <p className="mb-2 text-xs font-medium text-gray-500">
+    //                     Change User Role
+    //                   </p>
+    //                   <ChangeUserRole
+    //                     userId={user._id}
+    //                     currentRole={user.role}
+    //                     loggedInUserId={session.user.id}
+    //                   />
+    //                 </div>
+    //               </div>
+    //             ))}
+    //           </div>
+    //         </>
+    //       )}
+    //     </div>
+    //   </div>
+    // </div>
+    <div className="min-h-screen bg-[#10233F] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Back to Home */}
         <Link
           href="/"
-          className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-gray-600 transition hover:text-blue-600"
+          className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-gray-300 transition hover:text-blue-400"
         >
           <span>←</span> Back to Home
         </Link>
 
         {/* Page Heading */}
         <div className="mb-7">
-          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-white sm:text-3xl">
             Manage Users
           </h1>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-2 text-sm text-gray-300">
             View and manage all registered users.
           </p>
         </div>
 
         {/* Summary Cards */}
         <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-xl border bg-white p-5 shadow-sm">
-            <p className="text-sm text-gray-500">Total Users</p>
-            <h2 className="mt-2 text-2xl font-bold text-gray-900">
+          <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-5 shadow-sm">
+            <p className="text-sm text-gray-300">Total Users</p>
+            <h2 className="mt-2 text-2xl font-bold text-white">
               {users.length}
             </h2>
           </div>
 
-          <div className="rounded-xl border bg-white p-5 shadow-sm">
-            <p className="text-sm text-gray-500">Customers</p>
-            <h2 className="mt-2 text-2xl font-bold text-blue-600">
+          <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-5 shadow-sm">
+            <p className="text-sm text-gray-300">Customers</p>
+            <h2 className="mt-2 text-2xl font-bold text-blue-400">
               {customers}
             </h2>
           </div>
 
-          <div className="rounded-xl border bg-white p-5 shadow-sm">
-            <p className="text-sm text-gray-500">Technicians</p>
-            <h2 className="mt-2 text-2xl font-bold text-purple-600">
+          <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-5 shadow-sm">
+            <p className="text-sm text-gray-300">Technicians</p>
+            <h2 className="mt-2 text-2xl font-bold text-purple-400">
               {technicians}
             </h2>
           </div>
         </div>
 
         {/* Users List */}
-        <div className="overflow-hidden rounded-xl border bg-white shadow-sm">
-          <div className="border-b px-5 py-4">
-            <h2 className="font-semibold text-gray-900">All Users</h2>
-            <p className="mt-1 text-sm text-gray-500">
+        <div className="overflow-hidden rounded-xl border border-[#345071] bg-[#1B3658] shadow-sm">
+          <div className="border-b border-[#345071] px-5 py-4">
+            <h2 className="font-semibold text-white">All Users</h2>
+            <p className="mt-1 text-sm text-gray-400">
               {users.length} registered users
             </p>
           </div>
 
           {errorMessage ? (
-            <div className="p-8 text-center text-sm text-red-500">
+            <div className="p-8 text-center text-sm text-red-400">
               {errorMessage}
             </div>
           ) : users.length === 0 ? (
-            <div className="p-10 text-center text-gray-500">
+            <div className="p-10 text-center text-gray-300">
               No users found.
             </div>
           ) : (
@@ -159,7 +343,7 @@ export default async function AdminUsersPage() {
               {/* Desktop Table */}
               <div className="hidden overflow-x-auto md:block">
                 <table className="w-full text-left text-sm">
-                  <thead className="bg-gray-50 text-gray-500">
+                  <thead className="bg-[#142D4C] text-gray-300">
                     <tr>
                       <th className="px-6 py-4 font-medium">User</th>
                       <th className="px-6 py-4 font-medium">Email</th>
@@ -169,11 +353,11 @@ export default async function AdminUsersPage() {
                     </tr>
                   </thead>
 
-                  <tbody className="divide-y">
+                  <tbody className="divide-y divide-[#345071]">
                     {users.map((user) => (
                       <tr
                         key={user._id}
-                        className="transition hover:bg-gray-50"
+                        className="transition hover:bg-[#264669]/50"
                       >
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-3">
@@ -184,17 +368,17 @@ export default async function AdminUsersPage() {
                                 className="h-10 w-10 rounded-full object-cover"
                               />
                             ) : (
-                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 font-semibold text-blue-700">
+                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/15 font-semibold text-blue-400">
                                 {getInitial(user.name)}
                               </div>
                             )}
-                            <span className="font-medium text-gray-900">
+                            <span className="font-medium text-white">
                               {user.name || "Unnamed User"}
                             </span>
                           </div>
                         </td>
 
-                        <td className="px-6 py-4 text-gray-600">
+                        <td className="break-all px-6 py-4 text-gray-300">
                           {user.email}
                         </td>
 
@@ -206,9 +390,10 @@ export default async function AdminUsersPage() {
                           </span>
                         </td>
 
-                        <td className="px-6 py-4 text-gray-600">
+                        <td className="px-6 py-4 text-gray-300">
                           {formatDate(user.createdAt)}
                         </td>
+
                         <td className="px-6 py-4">
                           <ChangeUserRole
                             userId={user._id}
@@ -223,7 +408,7 @@ export default async function AdminUsersPage() {
               </div>
 
               {/* Mobile Cards */}
-              <div className="divide-y md:hidden">
+              <div className="divide-y divide-[#345071] md:hidden">
                 {users.map((user) => (
                   <div key={user._id} className="space-y-3 p-4">
                     <div className="flex items-center gap-3">
@@ -231,36 +416,37 @@ export default async function AdminUsersPage() {
                         <img
                           src={user.image}
                           alt={user.name || "User"}
-                          className="h-11 w-11 rounded-full object-cover"
+                          className="h-11 w-11 shrink-0 rounded-full object-cover"
                         />
                       ) : (
-                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-blue-100 font-semibold text-blue-700">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-500/15 font-semibold text-blue-400">
                           {getInitial(user.name)}
                         </div>
                       )}
 
                       <div className="min-w-0 flex-1">
-                        <h3 className="truncate font-semibold text-gray-900">
+                        <h3 className="truncate font-semibold text-white">
                           {user.name || "Unnamed User"}
                         </h3>
-                        <p className="truncate text-sm text-gray-500">
+                        <p className="break-all text-sm text-gray-400">
                           {user.email}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       <span
                         className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${getRoleStyle(user.role)}`}
                       >
                         {user.role}
                       </span>
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-gray-400">
                         Joined: {formatDate(user.createdAt)}
                       </span>
                     </div>
-                    <div className="pt-2">
-                      <p className="mb-2 text-xs font-medium text-gray-500">
+
+                    <div className="border-t border-[#345071] pt-3">
+                      <p className="mb-2 text-xs font-medium text-gray-300">
                         Change User Role
                       </p>
                       <ChangeUserRole

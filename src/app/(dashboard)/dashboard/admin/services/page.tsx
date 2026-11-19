@@ -95,41 +95,260 @@ export default async function AdminServicesPage({ searchParams }: Props) {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-6 sm:px-6 lg:px-8">
+    // <div className="min-h-screen bg-gray-50 px-4 py-6 sm:px-6 lg:px-8">
+    //   <div className="mx-auto max-w-7xl space-y-6">
+    //     <Link
+    //       href="/"
+    //       className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-blue-600"
+    //     >
+    //       ← Back to Home
+    //     </Link>
+
+    //     <div>
+    //       <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+    //         Service Approval
+    //       </h1>
+    //       <p className="mt-1 text-sm text-gray-500">
+    //         Review and manage services submitted by technicians.
+    //       </p>
+    //     </div>
+
+    //     {/* Summary Cards */}
+    //     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    //       <div className="rounded-xl border bg-white p-5">
+    //         <p className="text-sm text-gray-500">Total Services</p>
+    //         <h2 className="mt-2 text-2xl font-bold">{allServices.length}</h2>
+    //       </div>
+
+    //       <div className="rounded-xl border bg-white p-5">
+    //         <p className="text-sm text-amber-600">Pending Services</p>
+    //         <h2 className="mt-2 text-2xl font-bold text-amber-600">
+    //           {pendingServices.length}
+    //         </h2>
+    //       </div>
+
+    //       <div className="rounded-xl border bg-white p-5">
+    //         <p className="text-sm text-green-600">Approved Services</p>
+    //         <h2 className="mt-2 text-2xl font-bold text-green-600">
+    //           {approvedServices.length}
+    //         </h2>
+    //       </div>
+    //     </div>
+
+    //     {/* Status Filters */}
+    //     <div className="flex flex-wrap gap-2">
+    //       {filters.map((filter) => (
+    //         <Link
+    //           key={filter.value}
+    //           href={`/dashboard/admin/services?status=${filter.value}`}
+    //           className={`rounded-lg border px-4 py-2 text-sm font-medium transition ${
+    //             activeFilter === filter.value
+    //               ? "border-blue-600 bg-blue-600 text-white"
+    //               : "border-gray-200 bg-white text-gray-600 hover:border-blue-300"
+    //           }`}
+    //         >
+    //           {filter.label} ({filter.count})
+    //         </Link>
+    //       ))}
+    //     </div>
+
+    //     {/* Desktop Table */}
+    //     <div className="hidden overflow-hidden rounded-xl border bg-white md:block">
+    //       <div className="overflow-x-auto">
+    //         <table className="w-full text-left text-sm">
+    //           <thead className="bg-gray-100 text-gray-600">
+    //             <tr>
+    //               <th className="px-5 py-4">Service</th>
+    //               <th className="px-5 py-4">Technician</th>
+    //               <th className="px-5 py-4">Price</th>
+    //               <th className="px-6 py-4 text-left">Availability</th>
+    //               <th className="px-5 py-4">Status</th>
+    //               <th className="px-5 py-4">Action</th>
+    //             </tr>
+    //           </thead>
+
+    //           <tbody className="divide-y">
+    //             {filteredServices.map((service) => (
+    //               <tr key={service._id} className="hover:bg-gray-50">
+    //                 <td className="px-5 py-4">
+    //                   <div className="flex items-center gap-3">
+    //                     <img
+    //                       src={service.image}
+    //                       alt={service.title}
+    //                       className="h-12 w-12 rounded-lg object-cover"
+    //                     />
+    //                     <div>
+    //                       <p className="font-semibold text-gray-800">
+    //                         {service.title}
+    //                       </p>
+    //                       <p className="text-xs text-gray-500">
+    //                         {service.category}
+    //                       </p>
+    //                     </div>
+    //                   </div>
+    //                 </td>
+
+    //                 <td className="px-5 py-4">
+    //                   <p className="font-medium">{service.technicianName}</p>
+    //                   <p className="text-xs text-gray-500">
+    //                     {service.technicianEmail}
+    //                   </p>
+    //                 </td>
+
+    //                 <td className="px-5 py-4 font-medium">
+    //                   ${service.basePrice}
+    //                 </td>
+    //                 <td className="px-6 py-4">
+    //                   <span
+    //                     className={`rounded-full px-3 py-1 text-xs font-medium ${service.isAvailable ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}`}
+    //                   >
+    //                     {service.isAvailable ? "Available" : "Unavailable"}
+    //                   </span>
+    //                 </td>
+
+    //                 <td className="px-5 py-4">
+    //                   <span
+    //                     className={`rounded-full px-3 py-1 text-xs font-semibold ${
+    //                       service.approvalStatus === "approved"
+    //                         ? "bg-green-100 text-green-700"
+    //                         : service.approvalStatus === "rejected"
+    //                           ? "bg-red-100 text-red-700"
+    //                           : "bg-amber-100 text-amber-700"
+    //                     }`}
+    //                   >
+    //                     {service.approvalStatus}
+    //                   </span>
+    //                 </td>
+
+    //                 <td className="px-5 py-4">
+    //                   {/* {service.approvalStatus === "pending" ? (
+    //                     <ServiceApprovalActions serviceId={service._id} userId={user.id} />
+    //                   ) : (
+    //                     <span className="text-xs text-gray-400">Reviewed</span>
+    //                   )} */}
+    //                   <ServiceApprovalActions
+    //                     serviceId={service._id}
+    //                     userId={user.id}
+    //                   />
+    //                 </td>
+    //               </tr>
+    //             ))}
+    //           </tbody>
+    //         </table>
+    //       </div>
+    //     </div>
+
+    //     {/* Mobile Cards */}
+    //     <div className="space-y-4 md:hidden">
+    //       {filteredServices.map((service) => (
+    //         <div
+    //           key={service._id}
+    //           className="rounded-xl border bg-white p-4 shadow-sm"
+    //         >
+    //           <div className="flex gap-3">
+    //             <img
+    //               src={service.image}
+    //               alt={service.title}
+    //               className="h-20 w-20 rounded-lg object-cover"
+    //             />
+
+    //             <div className="min-w-0 flex-1">
+    //               <h3 className="font-semibold text-gray-900">
+    //                 {service.title}
+    //               </h3>
+    //               <p className="text-sm text-gray-500">{service.category}</p>
+    //               <p className="mt-1 font-semibold">৳{service.basePrice}</p>
+    //               <div className="flex items-center justify-between text-sm">
+    //                 <span className="text-gray-500">Availability</span>
+    //                 <span
+    //                   className={`rounded-full px-3 py-1 text-xs font-medium ${service.isAvailable ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}`}
+    //                 >
+    //                   {service.isAvailable ? "Available" : "Unavailable"}
+    //                 </span>
+    //               </div>
+    //               <span
+    //                 className={`mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold ${
+    //                   service.approvalStatus === "approved"
+    //                     ? "bg-green-100 text-green-700"
+    //                     : service.approvalStatus === "rejected"
+    //                       ? "bg-red-100 text-red-700"
+    //                       : "bg-amber-100 text-amber-700"
+    //                 }`}
+    //               >
+    //                 {service.approvalStatus}
+    //               </span>
+    //             </div>
+    //           </div>
+
+    //           <div className="mt-3 border-t pt-3">
+    //             <p className="text-sm font-medium text-gray-700">
+    //               {service.technicianName}
+    //             </p>
+    //             <p className="text-xs text-gray-500">
+    //               {service.technicianEmail}
+    //             </p>
+    //           </div>
+
+    //           {/* {service.approvalStatus === "pending" && (
+    //             <div className="mt-4">
+    //               <ServiceApprovalActions serviceId={service._id} userId={user.id} />
+    //             </div>
+    //           )} */}
+    //           <ServiceApprovalActions
+    //             serviceId={service._id}
+    //             userId={user.id}
+    //           />
+    //         </div>
+    //       ))}
+    //     </div>
+
+    //     {filteredServices.length === 0 && (
+    //       <div className="rounded-xl border bg-white px-4 py-12 text-center">
+    //         <h3 className="font-semibold text-gray-800">No services found</h3>
+    //         <p className="mt-1 text-sm text-gray-500">
+    //           There are no services in this approval status.
+    //         </p>
+    //       </div>
+    //     )}
+    //   </div>
+    // </div>
+    <div className="min-h-screen bg-[#10233F] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl space-y-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-blue-600"
+          className="inline-flex items-center gap-2 text-sm font-medium text-gray-300 transition hover:text-blue-400"
         >
           ← Back to Home
         </Link>
 
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-white sm:text-3xl">
             Service Approval
           </h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-gray-300">
             Review and manage services submitted by technicians.
           </p>
         </div>
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-xl border bg-white p-5">
-            <p className="text-sm text-gray-500">Total Services</p>
-            <h2 className="mt-2 text-2xl font-bold">{allServices.length}</h2>
+          <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-5">
+            <p className="text-sm text-gray-300">Total Services</p>
+            <h2 className="mt-2 text-2xl font-bold text-white">
+              {allServices.length}
+            </h2>
           </div>
 
-          <div className="rounded-xl border bg-white p-5">
-            <p className="text-sm text-amber-600">Pending Services</p>
-            <h2 className="mt-2 text-2xl font-bold text-amber-600">
+          <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-5">
+            <p className="text-sm text-amber-400">Pending Services</p>
+            <h2 className="mt-2 text-2xl font-bold text-amber-400">
               {pendingServices.length}
             </h2>
           </div>
 
-          <div className="rounded-xl border bg-white p-5">
-            <p className="text-sm text-green-600">Approved Services</p>
-            <h2 className="mt-2 text-2xl font-bold text-green-600">
+          <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-5">
+            <p className="text-sm text-green-400">Approved Services</p>
+            <h2 className="mt-2 text-2xl font-bold text-green-400">
               {approvedServices.length}
             </h2>
           </div>
@@ -143,8 +362,8 @@ export default async function AdminServicesPage({ searchParams }: Props) {
               href={`/dashboard/admin/services?status=${filter.value}`}
               className={`rounded-lg border px-4 py-2 text-sm font-medium transition ${
                 activeFilter === filter.value
-                  ? "border-blue-600 bg-blue-600 text-white"
-                  : "border-gray-200 bg-white text-gray-600 hover:border-blue-300"
+                  ? "border-blue-500 bg-blue-600 text-white"
+                  : "border-[#45617F] bg-[#1B3658] text-gray-300 hover:border-blue-400 hover:text-white"
               }`}
             >
               {filter.label} ({filter.count})
@@ -153,10 +372,10 @@ export default async function AdminServicesPage({ searchParams }: Props) {
         </div>
 
         {/* Desktop Table */}
-        <div className="hidden overflow-hidden rounded-xl border bg-white md:block">
+        <div className="hidden overflow-hidden rounded-xl border border-[#345071] bg-[#1B3658] md:block">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-gray-100 text-gray-600">
+              <thead className="bg-[#142D4C] text-gray-300">
                 <tr>
                   <th className="px-5 py-4">Service</th>
                   <th className="px-5 py-4">Technician</th>
@@ -167,9 +386,12 @@ export default async function AdminServicesPage({ searchParams }: Props) {
                 </tr>
               </thead>
 
-              <tbody className="divide-y">
+              <tbody className="divide-y divide-[#345071]">
                 {filteredServices.map((service) => (
-                  <tr key={service._id} className="hover:bg-gray-50">
+                  <tr
+                    key={service._id}
+                    className="transition hover:bg-[#264669]/50"
+                  >
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
                         <img
@@ -178,10 +400,10 @@ export default async function AdminServicesPage({ searchParams }: Props) {
                           className="h-12 w-12 rounded-lg object-cover"
                         />
                         <div>
-                          <p className="font-semibold text-gray-800">
+                          <p className="font-semibold text-white">
                             {service.title}
                           </p>
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs text-gray-400">
                             {service.category}
                           </p>
                         </div>
@@ -189,18 +411,25 @@ export default async function AdminServicesPage({ searchParams }: Props) {
                     </td>
 
                     <td className="px-5 py-4">
-                      <p className="font-medium">{service.technicianName}</p>
-                      <p className="text-xs text-gray-500">
+                      <p className="font-medium text-gray-200">
+                        {service.technicianName}
+                      </p>
+                      <p className="text-xs text-gray-400">
                         {service.technicianEmail}
                       </p>
                     </td>
 
-                    <td className="px-5 py-4 font-medium">
+                    <td className="px-5 py-4 font-medium text-white">
                       ${service.basePrice}
                     </td>
+
                     <td className="px-6 py-4">
                       <span
-                        className={`rounded-full px-3 py-1 text-xs font-medium ${service.isAvailable ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}`}
+                        className={`rounded-full px-3 py-1 text-xs font-medium ${
+                          service.isAvailable
+                            ? "bg-green-500/15 text-green-400"
+                            : "bg-gray-500/15 text-gray-400"
+                        }`}
                       >
                         {service.isAvailable ? "Available" : "Unavailable"}
                       </span>
@@ -210,10 +439,10 @@ export default async function AdminServicesPage({ searchParams }: Props) {
                       <span
                         className={`rounded-full px-3 py-1 text-xs font-semibold ${
                           service.approvalStatus === "approved"
-                            ? "bg-green-100 text-green-700"
+                            ? "bg-green-500/15 text-green-400"
                             : service.approvalStatus === "rejected"
-                              ? "bg-red-100 text-red-700"
-                              : "bg-amber-100 text-amber-700"
+                              ? "bg-red-500/15 text-red-400"
+                              : "bg-amber-500/15 text-amber-400"
                         }`}
                       >
                         {service.approvalStatus}
@@ -221,11 +450,6 @@ export default async function AdminServicesPage({ searchParams }: Props) {
                     </td>
 
                     <td className="px-5 py-4">
-                      {/* {service.approvalStatus === "pending" ? (
-                        <ServiceApprovalActions serviceId={service._id} userId={user.id} />
-                      ) : (
-                        <span className="text-xs text-gray-400">Reviewed</span>
-                      )} */}
                       <ServiceApprovalActions
                         serviceId={service._id}
                         userId={user.id}
@@ -243,36 +467,42 @@ export default async function AdminServicesPage({ searchParams }: Props) {
           {filteredServices.map((service) => (
             <div
               key={service._id}
-              className="rounded-xl border bg-white p-4 shadow-sm"
+              className="rounded-xl border border-[#345071] bg-[#1B3658] p-4 shadow-sm"
             >
-              <div className="flex gap-3">
+              <div className="flex flex-col gap-3 min-[400px]:flex-row">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="h-20 w-20 rounded-lg object-cover"
+                  className="h-24 w-full rounded-lg object-cover min-[400px]:h-20 min-[400px]:w-20"
                 />
 
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-semibold text-gray-900">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-gray-500">{service.category}</p>
-                  <p className="mt-1 font-semibold">৳{service.basePrice}</p>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-500">Availability</span>
+                  <h3 className="font-semibold text-white">{service.title}</h3>
+                  <p className="text-sm text-gray-400">{service.category}</p>
+                  <p className="mt-1 font-semibold text-white">
+                    ${service.basePrice}
+                  </p>
+
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    <span className="text-xs text-gray-400">Availability:</span>
                     <span
-                      className={`rounded-full px-3 py-1 text-xs font-medium ${service.isAvailable ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}`}
+                      className={`rounded-full px-3 py-1 text-xs font-medium ${
+                        service.isAvailable
+                          ? "bg-green-500/15 text-green-400"
+                          : "bg-gray-500/15 text-gray-400"
+                      }`}
                     >
                       {service.isAvailable ? "Available" : "Unavailable"}
                     </span>
                   </div>
+
                   <span
                     className={`mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold ${
                       service.approvalStatus === "approved"
-                        ? "bg-green-100 text-green-700"
+                        ? "bg-green-500/15 text-green-400"
                         : service.approvalStatus === "rejected"
-                          ? "bg-red-100 text-red-700"
-                          : "bg-amber-100 text-amber-700"
+                          ? "bg-red-500/15 text-red-400"
+                          : "bg-amber-500/15 text-amber-400"
                     }`}
                   >
                     {service.approvalStatus}
@@ -280,32 +510,29 @@ export default async function AdminServicesPage({ searchParams }: Props) {
                 </div>
               </div>
 
-              <div className="mt-3 border-t pt-3">
-                <p className="text-sm font-medium text-gray-700">
+              <div className="mt-4 border-t border-[#345071] pt-3">
+                <p className="text-sm font-medium text-gray-200">
                   {service.technicianName}
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="break-all text-xs text-gray-400">
                   {service.technicianEmail}
                 </p>
               </div>
 
-              {/* {service.approvalStatus === "pending" && (
-                <div className="mt-4">
-                  <ServiceApprovalActions serviceId={service._id} userId={user.id} />
-                </div>
-              )} */}
-              <ServiceApprovalActions
-                serviceId={service._id}
-                userId={user.id}
-              />
+              <div className="mt-4">
+                <ServiceApprovalActions
+                  serviceId={service._id}
+                  userId={user.id}
+                />
+              </div>
             </div>
           ))}
         </div>
 
         {filteredServices.length === 0 && (
-          <div className="rounded-xl border bg-white px-4 py-12 text-center">
-            <h3 className="font-semibold text-gray-800">No services found</h3>
-            <p className="mt-1 text-sm text-gray-500">
+          <div className="rounded-xl border border-[#345071] bg-[#1B3658] px-4 py-12 text-center">
+            <h3 className="font-semibold text-white">No services found</h3>
+            <p className="mt-1 text-sm text-gray-300">
               There are no services in this approval status.
             </p>
           </div>

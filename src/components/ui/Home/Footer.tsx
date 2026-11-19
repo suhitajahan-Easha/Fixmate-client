@@ -100,12 +100,12 @@ export default function Footer() {
               className="flex items-center gap-2 hover:text-blue-400"
             >
               <Phone size={17} className="text-blue-400" />
-              +880 1XXX-XXXXXX
+              +880 1789657423
             </a>
 
             <div className="flex items-center gap-2">
               <MapPin size={17} className="text-blue-400" />
-              Dhaka, Bangladesh
+              USA
             </div>
           </div>
         </div>
