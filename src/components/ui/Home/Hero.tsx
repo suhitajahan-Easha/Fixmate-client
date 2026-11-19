@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <section className="relative flex min-h-[600px] items-center overflow-hidden bg-[#10233F]">
+    <section className="relative flex min-h-150 items-center overflow-hidden bg-[#10233F]">
       {/* Background Image */}
       <Image
         src="/hero.jfif"
@@ -16,7 +16,7 @@ const Hero = () => {
       />
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#10233F] via-[#10233F]/90 to-[#10233F]/30" />
+      <div className="absolute inset-0 bg-linear-to-r from-[#10233F] via-[#10233F]/90 to-[#10233F]/30" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 sm:px-8 lg:px-12">

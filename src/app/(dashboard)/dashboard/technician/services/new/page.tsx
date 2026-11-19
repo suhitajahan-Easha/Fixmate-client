@@ -455,13 +455,13 @@ export default  function AddServicePage() {
                 <label className="mb-3 block text-sm font-medium text-gray-200">Service Mode *</label>
 
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-[#45617F] bg-[#264669] p-4 transition has-[:checked]:border-blue-400 has-[:checked]:bg-blue-500/10">
+                  <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-[#45617F] bg-[#264669] p-4 transition has-checked:border-blue-400 has-checked:bg-blue-500/10">
                     <input type="radio" name="serviceMode" value="Home Visit" required className="accent-blue-600" />
                     <House size={20} className="text-blue-400" />
                     <span className="text-sm font-medium text-gray-200">Home Visit</span>
                   </label>
 
-                  <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-[#45617F] bg-[#264669] p-4 transition has-[:checked]:border-blue-400 has-[:checked]:bg-blue-500/10">
+                  <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-[#45617F] bg-[#264669] p-4 transition has-checked:border-blue-400 has-checked:bg-blue-500/10">
                     <input type="radio" name="serviceMode" value="Shop Drop-off" required className="accent-blue-600" />
                     <Store size={20} className="text-blue-400" />
                     <span className="text-sm font-medium text-gray-200">Shop Drop-off</span>

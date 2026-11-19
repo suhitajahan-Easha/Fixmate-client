@@ -308,7 +308,7 @@ function SignInForm() {
   };
 
   return (
-    <div className="flex min-h-[100vh] items-center justify-center bg-[#10233F] px-4 py-10 sm:px-6">
+    <div className="flex min-h-screen items-center justify-center bg-[#10233F] px-4 py-10 sm:px-6">
       <div className="w-full max-w-md rounded-2xl border border-[#345071] bg-[#1B3658] p-6 shadow-xl sm:p-8">
         <div className="mb-7 text-center">
           <h1 className="text-3xl font-bold text-white sm:text-4xl">

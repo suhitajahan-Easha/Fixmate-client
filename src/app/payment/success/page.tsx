@@ -234,7 +234,7 @@ function PaymentSuccessContent() {
             <h1 className="text-2xl font-bold text-red-400 sm:text-3xl">
               Payment Verification Failed
             </h1>
-            <p className="mt-3 break-words text-sm text-gray-300 sm:text-base">
+            <p className="mt-3 wrap-break-word text-sm text-gray-300 sm:text-base">
               {error}
             </p>
           </>
@@ -251,7 +251,7 @@ function PaymentSuccessContent() {
             </p>
 
             <div className="mt-6 space-y-4 rounded-xl border border-[#345071] bg-[#264669] p-4 text-left sm:p-5">
-              <p className="break-words text-sm text-gray-200 sm:text-base">
+              <p className="wrap-break-word text-sm text-gray-200 sm:text-base">
                 <strong className="text-white">Service:</strong>{" "}
                 {payment.serviceTitle}
               </p>

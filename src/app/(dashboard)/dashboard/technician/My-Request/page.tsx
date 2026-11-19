@@ -866,7 +866,7 @@ export default function ManageRequestsPage() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[1200px] border-collapse text-left">
+              <table className="w-full min-w-300 border-collapse text-left">
                 <thead className="bg-[#142D4C]">
                   <tr className="border-b border-[#345071]">
                     <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">Customer</th>

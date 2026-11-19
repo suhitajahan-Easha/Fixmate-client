@@ -523,7 +523,7 @@ export default function AllBookingsPage() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[1150px] border-collapse text-left">
+              <table className="w-full min-w-287.5 border-collapse text-left">
                 <thead className="bg-[#142D4C]">
                   <tr className="border-b border-[#345071]">
                     <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-300">

@@ -114,7 +114,7 @@ export default function SignUpPage() {
     //     </p>
     //   </div>
     // </div>
-    <div className="flex min-h-[100vh] items-center justify-center bg-[#10233F] px-4 py-10 sm:px-6">
+    <div className="flex min-h-screen items-center justify-center bg-[#10233F] px-4 py-10 sm:px-6">
       <div className="w-full max-w-md rounded-2xl border border-[#345071] bg-[#1B3658] p-6 shadow-xl sm:p-8">
         <div className="mb-7 text-center">
           <h1 className="text-3xl font-bold text-white sm:text-4xl">
@@ -190,7 +190,7 @@ export default function SignUpPage() {
               Select Your Role
             </p>
             <div className="grid grid-cols-2 gap-3">
-              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#45617F] bg-[#264669] p-3 transition has-[:checked]:border-blue-500 has-[:checked]:bg-blue-600/20">
+              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#45617F] bg-[#264669] p-3 transition has-checked:border-blue-500 has-checked:bg-blue-600/20">
                 <input
                   type="radio"
                   name="role"
@@ -202,7 +202,7 @@ export default function SignUpPage() {
                   Customer
                 </span>
               </label>
-              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#45617F] bg-[#264669] p-3 transition has-[:checked]:border-blue-500 has-[:checked]:bg-blue-600/20">
+              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#45617F] bg-[#264669] p-3 transition has-checked:border-blue-500 has-checked:bg-blue-600/20">
                 <input
                   type="radio"
                   name="role"

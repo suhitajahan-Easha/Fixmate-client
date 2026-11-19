@@ -52,7 +52,7 @@ export default async function ServiceDetailsPage({ params }: Props) {
 
         {/* Service Image */}
         <section className="overflow-hidden rounded-2xl border border-[#29415F] bg-[#1B3658]">
-          <div className="relative h-64 sm:h-80 md:h-[420px]">
+          <div className="relative h-64 sm:h-80 md:h-105">
             {service.image ? (
               <Image src={service.image} alt={service.title} fill priority sizes="(max-width: 768px) 100vw, 1200px" unoptimized className="object-cover" />
             ) : (
@@ -161,7 +161,7 @@ export default async function ServiceDetailsPage({ params }: Props) {
                 <div className="flex items-center gap-4">
                   <TechnicianAvatar image={technician.image} name={technician.name} />
                   <div className="min-w-0">
-                    <h3 className="break-words text-lg font-semibold text-white">
+                    <h3 className="wrap-break-word text-lg font-semibold text-white">
                       {technician.name}
                     </h3>
                     <p className="mt-1 flex items-center gap-1.5 text-sm text-gray-300">
