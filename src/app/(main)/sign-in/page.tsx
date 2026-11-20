@@ -297,9 +297,10 @@ function SignInForm() {
         redirectTo?.startsWith("/") && !redirectTo.startsWith("//")
           ? redirectTo
           : dashboard;
-
-      router.push(safeRedirect);
-      router.refresh();
+          
+        window.location.assign(safeRedirect);
+      // router.push(safeRedirect);
+      // router.refresh();
     } catch {
       toast.error("Something went wrong. Please try again.");
     } finally {

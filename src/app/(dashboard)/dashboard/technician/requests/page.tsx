@@ -778,7 +778,7 @@ export default function ManageRequestsPage() {
 
   if (isPending || loading) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center bg-[#10233F]">
+      <div className="flex min-h-[100vh] items-center justify-center bg-[#10233F]">
         <p className="text-gray-300">Loading repair requests...</p>
       </div>
     );
