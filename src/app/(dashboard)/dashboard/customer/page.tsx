@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -16,6 +15,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import StatsCard from "../_components/statscard";
 
 interface Booking {
   _id: string;
@@ -47,18 +47,19 @@ const CustomerDashboard = () => {
 
     const fetchBookings = async () => {
       const { data, error } = await authClient.token();
-            const token = data?.token;
+      const token = data?.token;
       try {
         setLoading(true);
         setError("");
 
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${userId}`,
-          { cache: "no-store",
-           headers:{
-                  authorization:`Bearer ${token}`,
-                }
-           },
+          {
+            cache: "no-store",
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          },
         );
 
         const ddata = await response.json();
@@ -69,14 +70,13 @@ const CustomerDashboard = () => {
 
         const sortedBookings = [...(ddata.result || [])].sort(
           (a, b) =>
-            new Date(b.createdAt).getTime() -
-            new Date(a.createdAt).getTime()
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
         );
 
         setBookings(sortedBookings);
       } catch (error) {
         setError(
-          error instanceof Error ? error.message : "Something went wrong"
+          error instanceof Error ? error.message : "Something went wrong",
         );
       } finally {
         setLoading(false);
@@ -90,11 +90,11 @@ const CustomerDashboard = () => {
   const totalRequests = bookings.length;
 
   const activeJobs = bookings.filter((booking) =>
-    ["requested", "accepted", "in-progress"].includes(booking.status)
+    ["requested", "accepted", "in-progress"].includes(booking.status),
   ).length;
 
   const completedJobs = bookings.filter(
-    (booking) => booking.status === "completed"
+    (booking) => booking.status === "completed",
   ).length;
 
   const recentBookings = bookings.slice(0, 3);
@@ -152,9 +152,7 @@ const CustomerDashboard = () => {
       <div className="flex min-h-screen items-center justify-center bg-[#10233F] text-white">
         <div className="text-center">
           <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-blue-900 border-t-blue-400"></div>
-          <p className="mt-4 text-sm text-gray-300">
-            Loading dashboard...
-          </p>
+          <p className="mt-4 text-sm text-gray-300">Loading dashboard...</p>
         </div>
       </div>
     );
@@ -164,16 +162,20 @@ const CustomerDashboard = () => {
   if (!session?.user) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-[#10233F] px-4 text-center">
-        <h2 className="text-2xl font-bold text-white">
-          Please Sign In
-        </h2>
+        <h2 className="text-2xl font-bold text-white">Please Sign In</h2>
         <p className="mt-2 text-gray-300">
           Sign in to view your customer dashboard.
         </p>
-        <Link href="/sign-in" className="mt-5 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700">
+        <Link
+          href="/sign-in"
+          className="mt-5 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+        >
           Sign In
         </Link>
-        <Link href="/" className="mt-4 text-sm text-blue-300 hover:text-blue-200">
+        <Link
+          href="/"
+          className="mt-4 text-sm text-blue-300 hover:text-blue-200"
+        >
           Back to Home
         </Link>
       </div>
@@ -183,9 +185,11 @@ const CustomerDashboard = () => {
   return (
     <div className="min-h-screen bg-[#10233F] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-
         {/* Back to Home */}
-        <Link href="/" className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-blue-300 transition hover:text-white">
+        <Link
+          href="/"
+          className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-blue-300 transition hover:text-white"
+        >
           <ArrowLeft size={18} />
           Back to Home
         </Link>
@@ -208,7 +212,7 @@ const CustomerDashboard = () => {
         )}
 
         {/* Statistics Cards */}
-        <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {stats.map((stat) => (
             <div key={stat.title} className="rounded-xl border border-[#345071] bg-[#1B3658] p-5 shadow-lg transition duration-300 hover:-translate-y-1 hover:border-blue-500/50">
               <div className="flex items-center justify-between">
@@ -226,11 +230,15 @@ const CustomerDashboard = () => {
               </div>
             </div>
           ))}
+        </div> */}
+        <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {stats.map((stat) => (
+            <StatsCard key={stat.title} {...stat} />
+          ))}
         </div>
 
         {/* Main Dashboard Content */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-
           {/* Recent Bookings */}
           <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-4 shadow-lg sm:p-6 lg:col-span-2">
             <div className="mb-5 flex items-center justify-between gap-3">
@@ -242,7 +250,10 @@ const CustomerDashboard = () => {
                   Your latest repair requests
                 </p>
               </div>
-              <Link href="/dashboard/customer/bookings" className="flex shrink-0 items-center gap-1 text-sm font-medium text-blue-400 transition hover:text-blue-300">
+              <Link
+                href="/dashboard/customer/bookings"
+                className="flex shrink-0 items-center gap-1 text-sm font-medium text-blue-400 transition hover:text-blue-300"
+              >
                 View All <ArrowRight size={16} />
               </Link>
             </div>
@@ -260,17 +271,29 @@ const CustomerDashboard = () => {
                 <p className="mt-2 text-sm text-gray-300">
                   Explore our services and book your first repair.
                 </p>
-                <Link href="/services" className="mt-5 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700">
+                <Link
+                  href="/services"
+                  className="mt-5 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
+                >
                   Explore Services <ArrowRight size={16} />
                 </Link>
               </div>
             ) : (
               <div className="space-y-3">
                 {recentBookings.map((booking) => (
-                  <div key={booking._id} className="flex flex-col gap-3 rounded-lg bg-[#264669] p-3 sm:flex-row sm:items-center">
+                  <div
+                    key={booking._id}
+                    className="flex flex-col gap-3 rounded-lg bg-[#264669] p-3 sm:flex-row sm:items-center"
+                  >
                     <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-[#345071]">
                       {booking.serviceImage ? (
-                        <Image src={booking.serviceImage} alt={booking.serviceTitle} fill unoptimized className="object-cover" />
+                        <Image
+                          src={booking.serviceImage}
+                          alt={booking.serviceTitle}
+                          fill
+                          unoptimized
+                          className="object-cover"
+                        />
                       ) : (
                         <div className="flex h-full items-center justify-center">
                           <Wrench size={25} className="text-blue-300" />
@@ -291,10 +314,14 @@ const CustomerDashboard = () => {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2 sm:flex-col sm:items-end">
-                      <span className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${getStatusStyle(booking.status)}`}>
+                      <span
+                        className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${getStatusStyle(booking.status)}`}
+                      >
                         {booking.status.replace("-", " ")}
                       </span>
-                      <span className={`text-xs font-medium ${booking.paymentStatus === "paid" ? "text-green-400" : "text-yellow-300"}`}>
+                      <span
+                        className={`text-xs font-medium ${booking.paymentStatus === "paid" ? "text-green-400" : "text-yellow-300"}`}
+                      >
                         Payment: {booking.paymentStatus}
                       </span>
                     </div>
@@ -314,7 +341,10 @@ const CustomerDashboard = () => {
             </p>
 
             <div className="mt-5 space-y-3">
-              <Link href="/services" className="flex items-center justify-between rounded-lg bg-[#264669] p-4 transition duration-200 hover:bg-blue-600">
+              <Link
+                href="/services"
+                className="flex items-center justify-between rounded-lg bg-[#264669] p-4 transition duration-200 hover:bg-blue-600"
+              >
                 <div className="flex items-center gap-3">
                   <Search size={20} className="text-blue-300" />
                   <span className="text-sm font-medium text-white">
@@ -324,7 +354,10 @@ const CustomerDashboard = () => {
                 <ArrowRight size={17} className="text-gray-300" />
               </Link>
 
-              <Link href="/dashboard/customer/bookings" className="flex items-center justify-between rounded-lg bg-[#264669] p-4 transition duration-200 hover:bg-blue-600">
+              <Link
+                href="/dashboard/customer/bookings"
+                className="flex items-center justify-between rounded-lg bg-[#264669] p-4 transition duration-200 hover:bg-blue-600"
+              >
                 <div className="flex items-center gap-3">
                   <CalendarDays size={20} className="text-blue-300" />
                   <span className="text-sm font-medium text-white">
@@ -334,7 +367,10 @@ const CustomerDashboard = () => {
                 <ArrowRight size={17} className="text-gray-300" />
               </Link>
 
-              <Link href="/dashboard/profile" className="flex items-center justify-between rounded-lg bg-[#264669] p-4 transition duration-200 hover:bg-blue-600">
+              <Link
+                href="/dashboard/profile"
+                className="flex items-center justify-between rounded-lg bg-[#264669] p-4 transition duration-200 hover:bg-blue-600"
+              >
                 <div className="flex items-center gap-3">
                   <UserRound size={20} className="text-blue-300" />
                   <span className="text-sm font-medium text-white">

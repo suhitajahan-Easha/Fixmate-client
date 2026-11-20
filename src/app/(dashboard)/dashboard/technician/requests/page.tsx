@@ -1,4 +1,3 @@
-
 // "use client";
 
 // import { useEffect, useState } from "react";
@@ -563,7 +562,6 @@
 //   );
 // }
 
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -632,7 +630,9 @@ export default function ManageRequestsPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState<FilterStatus>("all");
-  const [updatingBookingId, setUpdatingBookingId] = useState<string | null>(null);
+  const [updatingBookingId, setUpdatingBookingId] = useState<string | null>(
+    null,
+  );
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [finalAmount, setFinalAmount] = useState("");
 
@@ -647,15 +647,15 @@ export default function ManageRequestsPage() {
 
     const fetchBookings = async () => {
       const { data, error } = await authClient.token();
-              const token = data?.token;
+      const token = data?.token;
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${session.user.id}`,{
-            headers:{
-               authorization:`Bearer ${token}`,
-              }
-
-          }
+          `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${session.user.id}`,
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          },
         );
 
         const ddata = await response.json();
@@ -687,7 +687,7 @@ export default function ManageRequestsPage() {
   const handleUpdateStatus = async (
     bookingId: string,
     status: string,
-    amount?: number
+    amount?: number,
   ) => {
     const { data, error } = await authClient.token();
     const token = data?.token;
@@ -705,14 +705,14 @@ export default function ManageRequestsPage() {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            authorization:`Bearer ${token}`,
+            authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             userId: session.user.id,
             status,
             ...(amount !== undefined && { finalAmount: amount }),
           }),
-        }
+        },
       );
 
       const ddata = await response.json();
@@ -732,8 +732,8 @@ export default function ManageRequestsPage() {
                   ? { finalAmount: amount }
                   : {}),
               }
-            : booking
-        )
+            : booking,
+        ),
       );
 
       toast.success(ddata.message || "Booking updated successfully");
@@ -759,11 +759,7 @@ export default function ManageRequestsPage() {
 
     const amount = Number(finalAmount);
 
-    if (
-      finalAmount.trim() === "" ||
-      !Number.isFinite(amount) ||
-      amount <= 0
-    ) {
+    if (finalAmount.trim() === "" || !Number.isFinite(amount) || amount <= 0) {
       toast.error("Please enter a valid final amount greater than zero");
       return;
     }
@@ -771,7 +767,7 @@ export default function ManageRequestsPage() {
     const updated = await handleUpdateStatus(
       selectedBooking._id,
       "completed",
-      amount
+      amount,
     );
 
     if (updated) {
@@ -791,8 +787,13 @@ export default function ManageRequestsPage() {
   if (!session?.user?.id) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 bg-[#10233F] px-4">
-        <h2 className="text-xl font-bold text-white">Please sign in to continue</h2>
-        <Link href="/sign-in" className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700">
+        <h2 className="text-xl font-bold text-white">
+          Please sign in to continue
+        </h2>
+        <Link
+          href="/sign-in"
+          className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
+        >
           Sign In
         </Link>
       </div>
@@ -803,8 +804,13 @@ export default function ManageRequestsPage() {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 bg-[#10233F] px-4">
         <h2 className="text-xl font-bold text-white">Access Denied</h2>
-        <p className="text-center text-sm text-gray-400">Only technicians can manage repair requests.</p>
-        <Link href="/" className="text-sm font-semibold text-blue-400 hover:text-blue-300">
+        <p className="text-center text-sm text-gray-400">
+          Only technicians can manage repair requests.
+        </p>
+        <Link
+          href="/"
+          className="text-sm font-semibold text-blue-400 hover:text-blue-300"
+        >
           Back to Home
         </Link>
       </div>
@@ -815,7 +821,10 @@ export default function ManageRequestsPage() {
     <div className="min-h-screen bg-[#10233F] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Back to Home */}
-        <Link href="/" className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition hover:text-blue-400">
+        <Link
+          href="/"
+          className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition hover:text-blue-400"
+        >
           ← Back to Home
         </Link>
 
@@ -859,7 +868,9 @@ export default function ManageRequestsPage() {
           {filteredBookings.length === 0 ? (
             <div className="px-6 py-16 text-center">
               <div className="mb-3 text-4xl">📋</div>
-              <h3 className="text-lg font-semibold text-white">No requests found</h3>
+              <h3 className="text-lg font-semibold text-white">
+                No requests found
+              </h3>
               <p className="mt-1 text-sm text-gray-400">
                 There are no bookings under this status.
               </p>
@@ -869,47 +880,80 @@ export default function ManageRequestsPage() {
               <table className="w-full min-w-300 border-collapse text-left">
                 <thead className="bg-[#142D4C]">
                   <tr className="border-b border-[#345071]">
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">Customer</th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">Service</th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">Address</th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">Preferred Date</th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">Problem Description</th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">Status</th>
-                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">Actions</th>
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                      Customer
+                    </th>
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                      Service
+                    </th>
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                      Address
+                    </th>
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                      Preferred Date
+                    </th>
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                      Problem Description
+                    </th>
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                      Status
+                    </th>
+                    <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
 
                 <tbody className="divide-y divide-[#345071]">
                   {filteredBookings.map((booking) => (
-                    <tr key={booking._id} className="transition hover:bg-[#264669]/50">
+                    <tr
+                      key={booking._id}
+                      className="transition hover:bg-[#264669]/50"
+                    >
                       {/* Customer */}
                       <td className="px-5 py-5">
-                        <p className="font-semibold text-white">{booking.customerName}</p>
-                        <p className="mt-1 text-sm text-gray-400">{booking.customerPhone}</p>
+                        <p className="font-semibold text-white">
+                          {booking.customerName}
+                        </p>
+                        <p className="mt-1 text-sm text-gray-400">
+                          {booking.customerPhone}
+                        </p>
                       </td>
 
                       {/* Service */}
                       <td className="px-5 py-5">
-                        <p className="max-w-45 font-medium text-gray-200">{booking.serviceTitle}</p>
+                        <p className="max-w-45 font-medium text-gray-200">
+                          {booking.serviceTitle}
+                        </p>
                       </td>
 
                       {/* Address */}
                       <td className="px-5 py-5">
-                        <p className="max-w-40 text-sm text-gray-300">{booking.address}</p>
+                        <p className="max-w-40 text-sm text-gray-300">
+                          {booking.address}
+                        </p>
                       </td>
 
                       {/* Preferred Date */}
                       <td className="whitespace-nowrap px-5 py-5 text-sm text-gray-300">
-                        {new Date(booking.preferredDate).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        })}
+                        {new Date(booking.preferredDate).toLocaleDateString(
+                          "en-US",
+                          {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          },
+                        )}
                       </td>
 
                       {/* Problem Description */}
-                      <td className="px-5 py-5">
+                      {/* <td className="px-5 py-5">
                         <p className="max-w-55 text-sm leading-6 text-gray-300">
+                          {booking.problemDescription}
+                        </p>
+                      </td> */}
+                      <td className="px-5 py-5 align-top">
+                        <p className="max-w-55 whitespace-normal wrap-break-word text-sm leading-6 text-gray-300">
                           {booking.problemDescription}
                         </p>
                       </td>
@@ -917,17 +961,23 @@ export default function ManageRequestsPage() {
                       {/* Status and Payment */}
                       <td className="px-5 py-5">
                         <div className="flex flex-col items-start gap-2">
-                          <span className={`inline-flex whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold ${getStatusStyle(booking.status)}`}>
+                          <span
+                            className={`inline-flex whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold ${getStatusStyle(booking.status)}`}
+                          >
                             {formatStatus(booking.status)}
                           </span>
 
                           {booking.status === "completed" && (
-                            <span className={`inline-flex whitespace-nowrap rounded-full border px-3 py-1 text-xs font-semibold ${
-                              booking.paymentStatus === "paid"
-                                ? "border-green-500/30 bg-green-500/15 text-green-400"
-                                : "border-amber-500/30 bg-amber-500/15 text-amber-400"
-                            }`}>
-                              {booking.paymentStatus === "paid" ? "Paid" : "Unpaid"}
+                            <span
+                              className={`inline-flex whitespace-nowrap rounded-full border px-3 py-1 text-xs font-semibold ${
+                                booking.paymentStatus === "paid"
+                                  ? "border-green-500/30 bg-green-500/15 text-green-400"
+                                  : "border-amber-500/30 bg-amber-500/15 text-amber-400"
+                              }`}
+                            >
+                              {booking.paymentStatus === "paid"
+                                ? "Paid"
+                                : "Unpaid"}
                             </span>
                           )}
                         </div>
@@ -940,15 +990,21 @@ export default function ManageRequestsPage() {
                             <>
                               <button
                                 disabled={updatingBookingId === booking._id}
-                                onClick={() => handleUpdateStatus(booking._id, "accepted")}
+                                onClick={() =>
+                                  handleUpdateStatus(booking._id, "accepted")
+                                }
                                 className="w-full rounded-lg bg-green-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
                               >
-                                {updatingBookingId === booking._id ? "Updating..." : "Accept"}
+                                {updatingBookingId === booking._id
+                                  ? "Updating..."
+                                  : "Accept"}
                               </button>
 
                               <button
                                 disabled={updatingBookingId === booking._id}
-                                onClick={() => handleUpdateStatus(booking._id, "rejected")}
+                                onClick={() =>
+                                  handleUpdateStatus(booking._id, "rejected")
+                                }
                                 className="w-full rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-xs font-semibold text-red-400 transition hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50"
                               >
                                 Reject
@@ -959,10 +1015,14 @@ export default function ManageRequestsPage() {
                           {booking.status === "accepted" && (
                             <button
                               disabled={updatingBookingId === booking._id}
-                              onClick={() => handleUpdateStatus(booking._id, "in-progress")}
+                              onClick={() =>
+                                handleUpdateStatus(booking._id, "in-progress")
+                              }
                               className="w-full rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
                             >
-                              {updatingBookingId === booking._id ? "Updating..." : "Start Work"}
+                              {updatingBookingId === booking._id
+                                ? "Updating..."
+                                : "Start Work"}
                             </button>
                           )}
 
@@ -976,8 +1036,12 @@ export default function ManageRequestsPage() {
                             </button>
                           )}
 
-                          {["completed", "rejected", "cancelled"].includes(booking.status) && (
-                            <span className="text-xs text-gray-400">No further action</span>
+                          {["completed", "rejected", "cancelled"].includes(
+                            booking.status,
+                          ) && (
+                            <span className="text-xs text-gray-400">
+                              No further action
+                            </span>
                           )}
                         </div>
                       </td>
@@ -994,14 +1058,18 @@ export default function ManageRequestsPage() {
           <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/70 px-3 py-6 sm:px-4">
             <div className="my-auto w-full max-w-md rounded-2xl border border-[#345071] bg-[#1B3658] p-5 shadow-xl sm:p-6">
               <div className="mb-5">
-                <h2 className="text-xl font-bold text-white">Complete Repair</h2>
+                <h2 className="text-xl font-bold text-white">
+                  Complete Repair
+                </h2>
                 <p className="mt-1 text-sm text-gray-400">
                   Enter the final amount charged to the customer.
                 </p>
               </div>
 
               <div className="mb-5 rounded-lg border border-[#345071] bg-[#142D4C] p-3">
-                <p className="text-sm font-semibold text-white">{selectedBooking.serviceTitle}</p>
+                <p className="text-sm font-semibold text-white">
+                  {selectedBooking.serviceTitle}
+                </p>
                 <p className="mt-1 text-xs text-gray-400">
                   Customer: {selectedBooking.customerName}
                 </p>
@@ -1011,7 +1079,10 @@ export default function ManageRequestsPage() {
               </div>
 
               <div className="mb-6">
-                <label htmlFor="finalAmount" className="mb-2 block text-sm font-semibold text-gray-200">
+                <label
+                  htmlFor="finalAmount"
+                  className="mb-2 block text-sm font-semibold text-gray-200"
+                >
                   Final Amount ($)
                 </label>
 
@@ -1048,7 +1119,9 @@ export default function ManageRequestsPage() {
                   onClick={handleCompleteBooking}
                   className="flex-1 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  {updatingBookingId === selectedBooking._id ? "Updating..." : "Mark Completed"}
+                  {updatingBookingId === selectedBooking._id
+                    ? "Updating..."
+                    : "Mark Completed"}
                 </button>
               </div>
             </div>
@@ -1058,4 +1131,3 @@ export default function ManageRequestsPage() {
     </div>
   );
 }
-

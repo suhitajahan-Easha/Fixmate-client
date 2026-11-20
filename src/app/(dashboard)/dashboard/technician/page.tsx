@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -14,6 +13,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import StatsCard from "../_components/statscard";
 
 interface Service {
   _id: string;
@@ -54,7 +54,7 @@ const TechnicianDashboard = () => {
 
     const fetchDashboardData = async () => {
       const { data, error } = await authClient.token();
-                  const token = data?.token;
+      const token = data?.token;
       try {
         setLoading(true);
         setError("");
@@ -63,12 +63,15 @@ const TechnicianDashboard = () => {
           fetch(`${process.env.NEXT_PUBLIC_API_URL}/services?id=${userId}`, {
             cache: "no-store",
           }),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${userId}`, {
-            cache: "no-store",
-            headers:{
-                  authorization:`Bearer ${token}`,
-                }
-          }),
+          fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${userId}`,
+            {
+              cache: "no-store",
+              headers: {
+                authorization: `Bearer ${token}`,
+              },
+            },
+          ),
         ]);
 
         const serviceData = await serviceResponse.json();
@@ -84,21 +87,19 @@ const TechnicianDashboard = () => {
 
         const sortedServices = [...(serviceData.result || [])].sort(
           (a, b) =>
-            new Date(b.createdAt).getTime() -
-            new Date(a.createdAt).getTime()
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
         );
 
         const sortedBookings = [...(bookingData.result || [])].sort(
           (a, b) =>
-            new Date(b.createdAt).getTime() -
-            new Date(a.createdAt).getTime()
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
         );
 
         setServices(sortedServices);
         setBookings(sortedBookings);
       } catch (error) {
         setError(
-          error instanceof Error ? error.message : "Something went wrong"
+          error instanceof Error ? error.message : "Something went wrong",
         );
       } finally {
         setLoading(false);
@@ -112,11 +113,11 @@ const TechnicianDashboard = () => {
   const totalServices = services.length;
 
   const approvedServices = services.filter(
-    (service) => service.approvalStatus === "approved"
+    (service) => service.approvalStatus === "approved",
   ).length;
 
   const pendingRequests = bookings.filter(
-    (booking) => booking.status === "requested"
+    (booking) => booking.status === "requested",
   ).length;
 
   const recentServices = services.slice(0, 3);
@@ -187,10 +188,16 @@ const TechnicianDashboard = () => {
         <p className="mt-2 text-gray-300">
           Sign in to view your technician dashboard.
         </p>
-        <Link href="/sign-in" className="mt-5 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700">
+        <Link
+          href="/sign-in"
+          className="mt-5 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+        >
           Sign In
         </Link>
-        <Link href="/" className="mt-4 text-sm text-blue-300 hover:text-blue-200">
+        <Link
+          href="/"
+          className="mt-4 text-sm text-blue-300 hover:text-blue-200"
+        >
           Back to Home
         </Link>
       </div>
@@ -200,9 +207,11 @@ const TechnicianDashboard = () => {
   return (
     <div className="min-h-screen bg-[#10233F] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-
         {/* Back to Home */}
-        <Link href="/" className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-blue-300 transition hover:text-white">
+        <Link
+          href="/"
+          className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-blue-300 transition hover:text-white"
+        >
           <ArrowLeft size={18} />
           Back to Home
         </Link>
@@ -225,7 +234,7 @@ const TechnicianDashboard = () => {
         )}
 
         {/* Statistics Cards */}
-        <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {stats.map((stat) => (
             <div key={stat.title} className="rounded-xl border border-[#345071] bg-[#1B3658] p-5 shadow-lg transition duration-300 hover:-translate-y-1 hover:border-blue-500/50">
               <div className="flex items-center justify-between">
@@ -243,11 +252,15 @@ const TechnicianDashboard = () => {
               </div>
             </div>
           ))}
+        </div> */}
+        <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {stats.map((stat) => (
+            <StatsCard key={stat.title} {...stat} />
+          ))}
         </div>
 
         {/* Main Dashboard Content */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-
           {/* Recent Services */}
           <div className="rounded-xl border border-[#345071] bg-[#1B3658] p-4 shadow-lg sm:p-6 lg:col-span-2">
             <div className="mb-5">
@@ -272,10 +285,19 @@ const TechnicianDashboard = () => {
             ) : (
               <div className="space-y-3">
                 {recentServices.map((service) => (
-                  <div key={service._id} className="flex flex-col gap-3 rounded-lg bg-[#264669] p-3 sm:flex-row sm:items-center">
+                  <div
+                    key={service._id}
+                    className="flex flex-col gap-3 rounded-lg bg-[#264669] p-3 sm:flex-row sm:items-center"
+                  >
                     <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-[#345071]">
                       {service.image ? (
-                        <Image src={service.image} alt={service.title} fill unoptimized className="object-cover" />
+                        <Image
+                          src={service.image}
+                          alt={service.title}
+                          fill
+                          unoptimized
+                          className="object-cover"
+                        />
                       ) : (
                         <div className="flex h-full items-center justify-center">
                           <Wrench size={25} className="text-blue-300" />
@@ -295,7 +317,9 @@ const TechnicianDashboard = () => {
                       </p>
                     </div>
 
-                    <span className={`w-fit rounded-full px-3 py-1 text-xs font-medium capitalize ${getApprovalStyle(service.approvalStatus)}`}>
+                    <span
+                      className={`w-fit rounded-full px-3 py-1 text-xs font-medium capitalize ${getApprovalStyle(service.approvalStatus)}`}
+                    >
                       {service.approvalStatus}
                     </span>
                   </div>
@@ -328,7 +352,10 @@ const TechnicianDashboard = () => {
             ) : (
               <div className="space-y-3">
                 {recentRequests.map((booking) => (
-                  <div key={booking._id} className="rounded-lg bg-[#264669] p-3">
+                  <div
+                    key={booking._id}
+                    className="rounded-lg bg-[#264669] p-3"
+                  >
                     <div className="flex items-start gap-3">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#345071]">
                         <UserRound size={20} className="text-blue-300" />
@@ -358,7 +385,6 @@ const TechnicianDashboard = () => {
               </div>
             )}
           </div>
-
         </div>
       </div>
     </div>
@@ -366,7 +392,3 @@ const TechnicianDashboard = () => {
 };
 
 export default TechnicianDashboard;
-
-
-
-

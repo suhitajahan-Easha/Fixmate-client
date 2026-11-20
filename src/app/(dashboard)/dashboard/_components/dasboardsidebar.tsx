@@ -88,7 +88,7 @@ const menuItemsByRole: Record<Role, MenuItem[]> = {
     {
       id: "request",
       name: "Repair Requests",
-      url: "/dashboard/technician/My-Request",
+      url: "/dashboard/technician/requests",
       icon: ClipboardList,
     },
     {
