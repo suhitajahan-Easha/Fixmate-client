@@ -3,8 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, UserRound, Wrench, ShieldCheck, CalendarCheck, Wallet, Users } from "lucide-react";
-import Navbar from "@/components/ui/Home/Navbar";
-import Footer from "@/components/ui/Home/Footer";
+
 
 export default function AboutPage() {
   return (
@@ -33,7 +32,7 @@ export default function AboutPage() {
           </div>
 
           <div className="relative h-64 overflow-hidden rounded-2xl border border-[#29415F] sm:h-80 md:h-96">
-            <Image src="/image2.jfif" alt="Technician working on a repair" fill priority sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+            <Image src="/aboutone.jpg" alt="Technician working on a repair" fill priority sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
           </div>
         </section>
 
@@ -50,7 +49,7 @@ export default function AboutPage() {
           <div className="grid gap-6 md:grid-cols-2">
             <div className="overflow-hidden rounded-2xl border border-[#29415F] bg-[#1B3658]">
               <div className="relative h-56 sm:h-64">
-                <Image src="/about2.jfif" alt="Customer using a smartphone" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                <Image src="/abouttwo.jpg" alt="Customer using a smartphone" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
               </div>
               <div className="p-6">
                 <div className="mb-3 flex items-center gap-2 text-blue-400">
@@ -65,7 +64,7 @@ export default function AboutPage() {
 
             <div className="overflow-hidden rounded-2xl border border-[#29415F] bg-[#1B3658]">
               <div className="relative h-56 sm:h-64">
-                <Image src="/image1.jfif" alt="Technician working on an appliance" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                <Image src="/about3.jpg" alt="Technician working on an appliance" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
               </div>
               <div className="p-6">
                 <div className="mb-3 flex items-center gap-2 text-blue-400">
@@ -119,7 +118,7 @@ export default function AboutPage() {
           </div>
 
           <div className="relative mb-8 h-56 overflow-hidden rounded-2xl border border-[#29415F] sm:h-72">
-            <Image src="/about1.jfif" alt="Professional repair work" fill sizes="100vw" className="object-cover" />
+            <Image src="/about4.jpg" alt="Professional repair work" fill sizes="100vw" className="object-cover" />
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -160,7 +159,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="relative h-56 overflow-hidden rounded-xl sm:h-64">
-              <Image src="/commit.jfif" alt="Technician carefully working on a repair" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+              <Image src="/about5.jpg" alt="Technician carefully working on a repair" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
             </div>
           </div>
         </section>
