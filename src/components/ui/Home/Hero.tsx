@@ -7,7 +7,7 @@ const Hero = () => {
     <section className="relative flex min-h-150 items-center overflow-hidden bg-[#10233F]">
       {/* Background Image */}
       <Image
-        src="/hero.jfif"
+        src="/banner.jpg"
         alt="Professional technician repairing a home appliance"
         fill
         priority
