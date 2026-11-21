@@ -62,12 +62,11 @@ if (!uri) {
   throw new Error("MONGODB_URI is not defined");
 }
 
+
 const options = {
   maxPoolSize: 10,
-  minPoolSize: 0,
-  maxIdleTimeMS: 10000,
-  serverSelectionTimeoutMS: 5000,
-  socketTimeoutMS: 20000,
+  serverSelectionTimeoutMS: 20000,
+  socketTimeoutMS: 45000,
 };
 
 const globalForMongo = globalThis as typeof globalThis & {
@@ -79,7 +78,6 @@ export const client =
 
 if (!globalForMongo.mongoClient) {
   globalForMongo.mongoClient = client;
-  attachDatabasePool(client);
 }
 
 export const db = client.db("Fixmate-9ph");

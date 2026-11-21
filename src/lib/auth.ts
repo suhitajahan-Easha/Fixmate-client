@@ -80,10 +80,12 @@ export const auth = betterAuth({
       },
     },
   },
+  //gemini suggest before 
+  // database: mongodbAdapter(db, {
+  //   client,
+  // }),
+  database: mongodbAdapter(db),
 
-  database: mongodbAdapter(db, {
-    client,
-  }),
 
   plugins: [
     jwt({
