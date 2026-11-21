@@ -29,8 +29,32 @@
 // export const db = client.db("Assignment-9ph");
 
 
+//before gemini suggest code 
+// import { MongoClient } from "mongodb";
 
+// const uri = process.env.MONGODB_URI;
+
+// if (!uri) {
+//   throw new Error("MONGODB_URI is not defined");
+// }
+
+// const globalForMongo = globalThis as typeof globalThis & {
+//   mongoClient?: MongoClient;
+// };
+
+// export const client =
+//   globalForMongo.mongoClient ?? new MongoClient(uri);
+
+// if (!globalForMongo.mongoClient) {
+//   globalForMongo.mongoClient = client;
+// }
+// export const db = client.db("Fixmate-9ph");
+// // export const db = client.db("Assignment-9ph");
+// // export const db = client.db("Fixmate");
+
+//after gemini suggest code
 import { MongoClient } from "mongodb";
+import { attachDatabasePool } from "@vercel/functions";
 
 const uri = process.env.MONGODB_URI;
 
@@ -38,18 +62,25 @@ if (!uri) {
   throw new Error("MONGODB_URI is not defined");
 }
 
+const options = {
+  maxPoolSize: 10,
+  minPoolSize: 0,
+  maxIdleTimeMS: 10000,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 20000,
+};
+
 const globalForMongo = globalThis as typeof globalThis & {
   mongoClient?: MongoClient;
 };
 
 export const client =
-  globalForMongo.mongoClient ?? new MongoClient(uri);
+  globalForMongo.mongoClient ?? new MongoClient(uri, options);
 
 if (!globalForMongo.mongoClient) {
   globalForMongo.mongoClient = client;
+  attachDatabasePool(client);
 }
-export const db = client.db("Fixmate-9ph");
-// export const db = client.db("Assignment-9ph");
-// export const db = client.db("Fixmate");
 
+export const db = client.db("Fixmate-9ph");
 
