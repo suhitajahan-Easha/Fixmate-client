@@ -1,6 +1,5 @@
 
 import FeaturedServices from "@/components/ui/Home/FeatureSection";
-import Footer from "@/components/ui/Home/Footer";
 import Hero from "@/components/ui/Home/Hero";
 import HowItWorks from "@/components/ui/Home/HowitWorks";
 import PopularCategories from "@/components/ui/Home/Popularcategories";
