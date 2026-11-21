@@ -60,7 +60,12 @@ const TechnicianDashboard = () => {
         setError("");
 
         const [serviceResponse, bookingResponse] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/services?id=${userId}`, {
+          // fetch(
+          //   `${process.env.NEXT_PUBLIC_API_URL}/services?id=${userId}`, {
+          //   cache: "no-store",
+          // }),
+          fetch(
+           `${process.env.NEXT_PUBLIC_API_URL}/services?id=${userId}&type=my-services`, {
             cache: "no-store",
           }),
           fetch(
