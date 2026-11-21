@@ -17,9 +17,9 @@ const FeaturedServices = async () => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/services?limit=6`,
-      {
-        cache: "no-store",
-      },
+      // {
+      //   cache: "no-store",
+      // },
     );
 
     if (!response.ok) {

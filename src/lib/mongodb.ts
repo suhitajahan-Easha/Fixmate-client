@@ -48,8 +48,8 @@ export const client =
 if (!globalForMongo.mongoClient) {
   globalForMongo.mongoClient = client;
 }
-
-export const db = client.db("Assignment-9ph");
+export const db = client.db("Fixmate-9ph");
+// export const db = client.db("Assignment-9ph");
 // export const db = client.db("Fixmate");
 
 
