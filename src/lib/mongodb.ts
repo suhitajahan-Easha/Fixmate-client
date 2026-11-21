@@ -53,8 +53,7 @@
 // // export const db = client.db("Fixmate");
 
 //after gemini suggest code
-import { MongoClient } from "mongodb";
-import { attachDatabasePool } from "@vercel/functions";
+import { MongoClient, Db } from "mongodb";
 
 const uri = process.env.MONGODB_URI;
 
@@ -62,9 +61,8 @@ if (!uri) {
   throw new Error("MONGODB_URI is not defined");
 }
 
-
 const options = {
-  maxPoolSize: 10,
+  maxPoolSize: 5,
   serverSelectionTimeoutMS: 20000,
   socketTimeoutMS: 45000,
 };
@@ -73,12 +71,32 @@ const globalForMongo = globalThis as typeof globalThis & {
   mongoClient?: MongoClient;
 };
 
-export const client =
-  globalForMongo.mongoClient ?? new MongoClient(uri, options);
+function getClient(): MongoClient {
+  const existing = globalForMongo.mongoClient as any;
+  const isClosed =
+    !existing ||
+    existing.topology?.isClosed?.() === true ||
+    existing.topology?.s?.state === "closed";
 
-if (!globalForMongo.mongoClient) {
-  globalForMongo.mongoClient = client;
+  if (isClosed) {
+    const newClient = new MongoClient(uri!, options);
+
+    newClient.on("topologyClosed", () => {
+      if (globalForMongo.mongoClient === newClient) {
+        globalForMongo.mongoClient = undefined;
+      }
+    });
+
+    globalForMongo.mongoClient = newClient;
+  }
+
+  return globalForMongo.mongoClient!;
 }
 
-export const db = client.db("Fixmate-9ph");
-
+export const db = new Proxy({} as Db, {
+  get(_target, prop, receiver) {
+    const currentDb = getClient().db("Fixmate-9ph");
+    const value = Reflect.get(currentDb, prop, receiver);
+    return typeof value === "function" ? value.bind(currentDb) : value;
+  },
+});
