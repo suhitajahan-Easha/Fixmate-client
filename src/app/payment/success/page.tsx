@@ -109,14 +109,14 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-
 interface Payment {
   amount: number;
   transactionId: string;
   serviceTitle: string;
 }
 
-function PaymentSuccessContent() {
+function  PaymentSuccessContent() {
+   
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
 
@@ -138,11 +138,12 @@ function PaymentSuccessContent() {
 
       hasVerified.current = true;
 
-      try {
+      try {  
         const response = await fetch("/api/payments/verify", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+             
           },
           body: JSON.stringify({ sessionId }),
         });

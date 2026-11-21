@@ -59,7 +59,7 @@ const PopularCategories = () => {
         </div>
 
         {/* Category Cards */}
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        {/* <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {categories.map((category) => {
             const Icon = category.icon;
 
@@ -77,7 +77,39 @@ const PopularCategories = () => {
                     />
                   </div>
 
-                  <h3 className="text-sm font-semibold text-white sm:text-base">
+                  <h3 className="text-xs font-semibold text-white sm:text-base">
+                    {category.name}
+                  </h3>
+                </div>
+
+                <ArrowUpRight
+                  size={18}
+                  className="shrink-0 text-blue-300 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white"
+                />
+              </Link>
+            );
+          })}
+        </div> */}
+
+        <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          {categories.map((category) => {
+            const Icon = category.icon;
+
+            return (
+              <Link
+                key={category.name}
+                href={`/services?category=${encodeURIComponent(category.name)}`}
+                className="group flex min-w-0 items-center justify-between gap-2 rounded-xl border border-[#345071] bg-[#172F50] p-3 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400 hover:bg-[#1D416B] hover:shadow-lg hover:shadow-blue-950/30 sm:p-5"
+              >
+                <div className="flex min-w-0 flex-1 items-center gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#263F60] transition-colors duration-300 group-hover:bg-blue-600 sm:h-12 sm:w-12">
+                    <Icon
+                      size={23}
+                      className="text-blue-300 transition-colors duration-300 group-hover:text-white"
+                    />
+                  </div>
+
+                  <h3 className="min-w-0 break-words text-xs font-semibold leading-tight text-white sm:text-base">
                     {category.name}
                   </h3>
                 </div>

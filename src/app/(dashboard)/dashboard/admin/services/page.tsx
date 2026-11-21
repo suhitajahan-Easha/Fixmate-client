@@ -449,11 +449,23 @@ export default async function AdminServicesPage({ searchParams }: Props) {
                       </span>
                     </td>
 
-                    <td className="px-5 py-4">
+                    {/* <td className="px-5 py-4">
                       <ServiceApprovalActions
                         serviceId={service._id}
-                        userId={user.id}
+                        approvalStatus={service.approvalStatus}
                       />
+                    </td> */}
+                    <td>
+                      {service.approvalStatus === "pending" ? (
+                        <ServiceApprovalActions
+                          serviceId={service._id}
+                          approvalStatus={service.approvalStatus}
+                        />
+                      ) : (
+                        <span className="text-sm text-gray-500">
+                          No further action needed
+                        </span>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -519,11 +531,23 @@ export default async function AdminServicesPage({ searchParams }: Props) {
                 </p>
               </div>
 
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <ServiceApprovalActions
                   serviceId={service._id}
-                  userId={user.id}
+                  approvalStatus={service.approvalStatus}
                 />
+              </div> */}
+              <div className="mt-4">
+                {service.approvalStatus === "pending" ? (
+                  <ServiceApprovalActions
+                    serviceId={service._id}
+                    approvalStatus={service.approvalStatus}
+                  />
+                ) : (
+                  <p className="text-sm text-gray-500">
+                    No further action needed
+                  </p>
+                )}
               </div>
             </div>
           ))}

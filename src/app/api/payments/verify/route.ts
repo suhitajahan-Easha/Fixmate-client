@@ -1,11 +1,27 @@
 
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
+  
   try {
+     const jwttoken=await auth.api.getToken({
+            headers:await headers()
+      })
+      
+      const token=jwttoken?.token
+      
+      if (!token) {
+      return NextResponse.json(
+        { success: false, message: "Unauthorized" },
+        { status: 401 },
+      );
+    }
     const { sessionId } = await request.json();
 
     if (!sessionId) {
+      
       return NextResponse.json(
         { success: false, message: "Session ID is required" },
         { status: 400 }
@@ -18,6 +34,7 @@ export async function POST(request: Request) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization:`Bearer ${token}`,
         },
         body: JSON.stringify({ sessionId }),
         cache: "no-store",

@@ -29,8 +29,8 @@ export default function ServiceFilters({ search = "", category = "", mode = "", 
 
         <select name="mode" defaultValue={mode} className="w-full rounded-lg border border-[#345071] bg-[#264669] px-4 py-3 text-sm text-white outline-none focus:border-blue-500">
           <option value="">All Service Modes</option>
-          <option value="home-visit">Home Visit</option>
-          <option value="shop-drop-off">Shop Drop-off</option>
+          <option value="Home Visit">Home Visit</option>
+          <option value="Shop Drop-off">Shop Drop-off</option>
         </select>
 
         <select name="sort" defaultValue={sort} className="w-full rounded-lg border border-[#345071] bg-[#264669] px-4 py-3 text-sm text-white outline-none focus:border-blue-500">

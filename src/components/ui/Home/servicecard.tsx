@@ -81,7 +81,7 @@ type Service = {
   title: string;
   category: string;
   image: string;
-  serviceMode: "home-visit" | "shop-drop-off";
+  serviceMode: "Home Visit" | "Shop Drop-off";
   serviceArea: string;
   basePrice: number;
   technicianName: string;
@@ -112,7 +112,7 @@ export default function ServiceCard({ service }: Props) {
         <div className="space-y-2 text-sm text-gray-300">
           <p>
             <span className="font-medium text-gray-100">Service Mode:</span>{" "}
-            {service.serviceMode === "home-visit"
+            {service.serviceMode === "Home Visit"
               ? "Home Visit"
               : "Shop Drop-off"}
           </p>

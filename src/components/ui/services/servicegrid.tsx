@@ -6,7 +6,7 @@ type Service = {
   title: string;
   category: string;
   image: string;
-  serviceMode: "home-visit" | "shop-drop-off";
+  serviceMode: "Home Visit" | "Shop Drop-off";
   serviceArea: string;
   basePrice: number;
   technicianName: string;

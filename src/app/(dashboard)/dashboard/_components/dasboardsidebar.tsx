@@ -9,6 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 
 import { authClient } from "@/lib/auth-client";
@@ -24,6 +25,7 @@ import {
   Users,
   CreditCard,
   UserRound,
+  X,
   ClipboardCheck,
   type LucideIcon,
 } from "lucide-react";
@@ -142,6 +144,7 @@ const menuItemsByRole: Record<Role, MenuItem[]> = {
 export function DashboardSidebar() {
   const { data: session, isPending } = authClient.useSession();
   const pathname = usePathname();
+  const { isMobile, setOpenMobile } = useSidebar();
 
   if (isPending) return null;
 
@@ -149,62 +152,34 @@ export function DashboardSidebar() {
   const menuItems = menuItemsByRole[role] || menuItemsByRole.customer;
 
   return (
-    // <Sidebar>
-    //   <SidebarHeader className="border-b px-4 py-4">
-    //     <Link href="/" className="flex items-center gap-2">
-    //       <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-white">
-    //         <Wrench size={21} />
-    //       </div>
-    //       <span className="text-xl font-bold text-gray-900">FixMate</span>
-    //     </Link>
-    //   </SidebarHeader>
-
-    //   <SidebarContent>
-    //     <SidebarGroup>
-    //       <p className="mb-3 px-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
-    //         Dashboard Menu
-    //       </p>
-
-    //       <SidebarMenu>
-    //         {menuItems.map((item) => {
-    //           const isActive =
-    //             pathname === item.url ||
-    //             (item.url !== "/dashboard/customer" &&
-    //               item.url !== "/dashboard/technician" &&
-    //               item.url !== "/dashboard/admin" &&
-    //               pathname.startsWith(`${item.url}/`));
-
-    //           return (
-    //             <SidebarMenuItem key={item.id}>
-    //               <SidebarMenuButton
-    //                 isActive={isActive}
-    //                 render={<Link href={item.url} />}
-    //               >
-    //                 <item.icon />
-    //                 <span>{item.name}</span>
-    //               </SidebarMenuButton>
-    //             </SidebarMenuItem>
-    //           );
-    //         })}
-    //       </SidebarMenu>
-    //     </SidebarGroup>
-    //   </SidebarContent>
-
-    //   <SidebarFooter className="border-t p-4">
-    //     <p className="text-xs text-gray-400">FixMate Dashboard</p>
-    //     <p className="text-sm font-medium capitalize text-gray-700">
-    //       {role} Account
-    //     </p>
-    //   </SidebarFooter>
-    // </Sidebar>
     <Sidebar className="!bg-[#02112f] !text-white border-r border-[#29415F]">
-      <SidebarHeader className="!bg-[#02112f] border-b border-[#29415F] px-4 py-5">
+      {/* <SidebarHeader className="!bg-[#02112f] border-b border-[#29415F] px-4 py-5">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-white">
             <HousePlug size={21} />
           </div>
           <span className="text-xl font-bold text-white">FixMate</span>
         </Link>
+      </SidebarHeader> */}
+      <SidebarHeader className="!bg-[#02112f] border-b border-[#29415F] px-4 py-5">
+        <div className="flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-white">
+              <HousePlug size={21} />
+            </div>
+            <span className="text-xl font-bold text-white">FixMate</span>
+          </Link>
+
+          {isMobile && (
+            <button
+              onClick={() => setOpenMobile(false)}
+              className="rounded-lg p-2 text-white transition hover:bg-[#172F50]"
+              aria-label="Close sidebar"
+            >
+              <X size={22} />
+            </button>
+          )}
+        </div>
       </SidebarHeader>
 
       <SidebarContent className="!bg-[#02112f] px-3 py-5">
@@ -225,6 +200,7 @@ export function DashboardSidebar() {
               return (
                 <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton
+                    onClick={() => setOpenMobile(false)}
                     isActive={isActive}
                     render={<Link href={item.url} />}
                     className={`h-11 rounded-lg px-3 transition-all duration-200 ${
