@@ -8,17 +8,16 @@ Customers can explore available repair services, submit repair requests, track b
 
 ## Live Website
 
-- **Frontend:** https://fixmate-client-suhitajahan-easha.vercel.app
-- **Backend API:** https://fixmate-server-swart.vercel.app
+- **Frontend:** https://fixmate-client-9.vercel.app/
+- **Backend API:** https://fixmate-server-zigh.vercel.app/
 
 ## Admin Credentials
 
 Use the following credentials to access the Admin Dashboard:
 
-- **Email:** `YOUR_ADMIN_EMAIL`
-- **Password:** `YOUR_ADMIN_PASSWORD`
+- **Email:** `mahbub@gmail.com`
+- **Password:** `Mahbub200`
 
-> Replace these placeholders with your actual seeded admin credentials before submitting the project. Do not publish real production passwords in a public repository.
 
 ## User Roles
 
@@ -107,7 +106,6 @@ Use the following credentials to access the Admin Dashboard:
 | `jsonwebtoken` | JWT utilities, if used |
 | `jose` | JWT verification |
 
-*Note: Confirm the package names against your actual frontend and backend `package.json` files before submission. Remove any package you haven't installed or used.*
 
 ## Payment Process
 
@@ -127,7 +125,7 @@ FixMate follows a pay-after-service model:
 ### 1. Clone the Repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/suhitajahan-Easha/Fixmate-client
 cd your-project-folder
 ```
 
