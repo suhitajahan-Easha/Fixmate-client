@@ -207,7 +207,7 @@ export default function Navbar() {
           )}
 
           {!isPending && user && (
-            <div className="relative">
+            <div className="relative ">
               <button
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
                 className="flex items-center gap-2 rounded-full border border-gray-700 p-1.5 pr-3 outline-none transition hover:bg-white/10"
@@ -230,12 +230,12 @@ export default function Navbar() {
               </button>
 
               {isProfileOpen && (
-                <div className="absolute right-0 top-full z-50 mt-2 w-60 rounded-xl border border-gray-200 bg-white p-2 shadow-lg">
-                  <div className="border-b border-gray-100 px-3 py-3">
-                    <p className="truncate font-semibold text-gray-900">
+                <div className="absolute right-0 top-full z-50 mt-2 w-60  rounded-xl  bg-[#111827] text-white p-2 shadow-lg">
+                  <div className="border-b  px-3 py-3">
+                    <p className="truncate font-semibold text-white">
                       {user.name}
                     </p>
-                    <p className="truncate text-xs text-gray-500">
+                    <p className="truncate text-xs text-white  hover:text-gray-500">
                       {user.email}
                     </p>
                     <span className="mt-2 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-medium capitalize text-blue-600">
@@ -246,7 +246,7 @@ export default function Navbar() {
                   <Link
                     href={dashboard}
                     onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-white hover:text-gray-700 hover:bg-gray-100"
                   >
                     <LayoutDashboard size={16} />
                     Dashboard
@@ -255,7 +255,7 @@ export default function Navbar() {
                   <Link
                     href="/dashboard/profile"
                     onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm  text-white hover:text-gray-700 hover:bg-gray-100"
                   >
                     <UserRound size={16} />
                     Update Profile
@@ -289,12 +289,12 @@ export default function Navbar() {
               </button>
 
               {isProfileOpen && (
-                <div className="absolute right-0 top-full z-50 mt-2 w-60 rounded-xl border border-gray-200 bg-white p-2 shadow-lg">
+                <div className="absolute right-0 top-full z-50 mt-2 w-60 rounded-xl bg-[#111827] text-white p-2 shadow-lg">
                   <div className="border-b border-gray-100 px-3 py-3">
-                    <p className="truncate font-semibold text-gray-900">
+                    <p className="truncate font-semibold text-white">
                       {user.name}
                     </p>
-                    <p className="truncate text-xs text-gray-500">
+                    <p className="truncate text-xs text-white  hover:text-gray-500">
                       {user.email}
                     </p>
                     <span className="mt-2 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-medium capitalize text-blue-600">
@@ -305,7 +305,7 @@ export default function Navbar() {
                   <Link
                     href={dashboard}
                     onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-white hover:text-gray-700 hover:bg-gray-100"
                   >
                     <LayoutDashboard size={16} />
                     Dashboard
@@ -314,7 +314,7 @@ export default function Navbar() {
                   <Link
                     href="/dashboard/profile"
                     onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-white hover:text-gray-700 hover:bg-gray-100"
                   >
                     <UserRound size={16} />
                     Update Profile
