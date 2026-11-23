@@ -99,7 +99,7 @@ export default  function AddServicePage() {
       form.reset();
       setImageUrl("");
 
-      router.push("/dashboard/technician/services");
+      router.push("/dashboard/technician/my-services");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Something went wrong!");
     }

@@ -77,7 +77,7 @@ export default async function MyServicesPage() {
           </div>
 
           <Link
-            href="/dashboard/technician/services/new"
+            href="/dashboard/technician/add-service"
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
             <Plus size={18} />
