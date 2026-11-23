@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { UserRound, House } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 export default function DashboardTopbar() {
   const { data: session, isPending } = authClient.useSession();
@@ -20,6 +21,7 @@ export default function DashboardTopbar() {
     <header className="sticky top-0 z-40 w-full bg-[#02112f] px-4 py-4 sm:px-6">
       <div className="flex items-center justify-between gap-3 rounded-2xl border border-[#345071] bg-[#1B3658] p-3 shadow-lg sm:px-5">
         <div className="flex min-w-0 items-center gap-3">
+          <SidebarTrigger className="border-0 bg-transparent text-white hover:bg-[#172F50] hover:text-white"/>
           <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#45617F] bg-[#264669]">
             {user.image ? (
               <Image src={user.image} alt={user.name || "User"} fill sizes="44px" unoptimized className="object-cover" />

@@ -12,9 +12,9 @@ export default function AboutPage() {
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 
         {/* Back to Home */}
-        <Link href="/" className="mb-8 inline-flex items-center gap-2 text-sm text-gray-300 transition hover:text-blue-400">
+        {/* <Link href="/" className="mb-8 inline-flex items-center gap-2 text-sm text-gray-300 transition hover:text-blue-400">
           <ArrowRight className="rotate-180" size={16} /> Back to Home
-        </Link>
+        </Link> */}
 
         {/* Hero Section */}
         <section className="grid items-center gap-8 py-10 md:grid-cols-2 md:py-16">

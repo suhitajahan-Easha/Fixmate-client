@@ -55,9 +55,9 @@ export default async function ServicesPage({ searchParams }: Props) {
     
     <main className="min-h-screen bg-[#02112f] px-4 py-8 md:px-8">
       <div className="mx-auto max-w-7xl space-y-8">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-300 transition hover:text-blue-400">
+        {/* <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-300 transition hover:text-blue-400">
           ← Back to Home
-        </Link>
+        </Link> */}
 
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold text-white md:text-4xl">
